@@ -204,12 +204,12 @@ section{padding:6rem 3rem}
 
 /* PROCESS */
 #process{background:var(--bg);position:relative}
-#process::before{content:"";position:absolute;inset:0;background:url("photo-process.png") center/cover no-repeat;opacity:0.08;z-index:0}
+#process::before{content:"";position:absolute;inset:0;background:url("photo-process2.png") center top/cover no-repeat;opacity:0.15;z-index:0}
 #process .container{position:relative;z-index:1}
-.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden}
-.proc-step{padding:2.25rem 1.75rem;border-right:1px solid var(--border2);transition:background 0.3s;position:relative}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4rem;border:1px solid rgba(59,130,246,0.2);border-radius:var(--radius);overflow:hidden}
+.proc-step{padding:2.25rem 1.75rem;border-right:1px solid var(--border2);transition:background 0.3s;position:relative;background:rgba(9,17,35,0.82);backdrop-filter:blur(8px)}
 .proc-step:last-child{border-right:none}
-.proc-step:hover{background:var(--bg2)}
+.proc-step:hover{background:rgba(15,25,50,0.92)}
 .proc-n{font-family:var(--font-display);font-size:3rem;font-weight:300;color:var(--border2);line-height:1;margin-bottom:1rem;transition:color 0.3s}
 .proc-step:hover .proc-n{color:rgba(59,130,246,0.2)}
 .proc-title{font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin-bottom:0.6rem;color:var(--text)}
@@ -232,6 +232,8 @@ section{padding:6rem 3rem}
 .work-img{aspect-ratio:16/9;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
 .work-img-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s;text-decoration:none}
 .work-card:hover .work-img-overlay{opacity:1}
+.work-iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none;border-radius:0}
+.work-img{position:relative;overflow:hidden}
 .work-card:hover .work-img::after{opacity:1}
 .work-body{padding:1.75rem}
 .work-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.875rem}
@@ -529,7 +531,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
   <div class="container">
     <div class="about-wrap">
       <div class="about-img-wrap reveal">
-        <img src="photo-about.png" alt="Onome Ahorituwere" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;display:block;border:1px solid var(--border2)">
+        <img src="onome-about.png" alt="Onome Ahorituwere" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;display:block;border:1px solid var(--border2)">
         <div class="about-badge">
           <div class="about-badge-num">7+</div>
           <div class="about-badge-lbl">Years of Mastery</div>
@@ -606,6 +608,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
     <h2 class="sec-title">Projects That<br><em>Delivered Results</em></h2>
     <p class="sec-sub">A snapshot of client projects spanning e-commerce, coaching, health, and professional services.</p>
     <div class="work-grid" id="workGrid"></div>
+    <div style="text-align:center;margin-top:3rem"><a href="portfolio.html" class="btn-pri" style="display:inline-flex">View All Projects &rarr;</a></div>
   </div>
 </section>
 
@@ -777,9 +780,17 @@ var modals={
 
 // RENDER PROJECTS
 var wg = document.getElementById('workGrid');
-projects.forEach(function(p){
+var cardColors = [
+  'linear-gradient(135deg,#0F4C81,#1a6fa8)',
+  'linear-gradient(135deg,#1a1a2e,#16213e)',
+  'linear-gradient(135deg,#0d3b2e,#1a5c45)',
+  'linear-gradient(135deg,#2d1b4e,#4a2d7a)',
+  'linear-gradient(135deg,#4a1942,#7b2d6e)',
+  'linear-gradient(135deg,#1a2a1a,#2d4a1e)'
+];
+projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
-  var img = '<div class="work-img" style="background:url(https://api.microlink.io/?url='+encodeURIComponent(p.url)+'&screenshot=true&meta=false&embed=screenshot.url) center/cover no-repeat;"><a href="'+p.url+'" target="_blank" class="work-img-overlay">View Live Site &rarr;</a></div>';
+  var img = '<div class="work-img" style="background:'+cardColors[idx]+';"><iframe src="'+p.url+'" class="work-iframe" loading="lazy" scrolling="no" title="'+p.title+'"></iframe><a href="'+p.url+'" target="_blank" class="work-img-overlay">View Live Site &rarr;</a></div>';
   wg.innerHTML += '<div class="work-card reveal">'+img+'<div class="work-body"><div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site &rarr;</a></div></div>';
 });
 
