@@ -104,7 +104,14 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 [data-theme="dark"] .hero-overlay{background:linear-gradient(105deg,rgba(2,6,23,0.93) 45%,rgba(2,6,23,0.45) 100%),linear-gradient(to top,rgba(2,6,23,1) 0%,transparent 55%)}
 [data-theme="light"] .hero-overlay{background:linear-gradient(105deg,rgba(10,20,60,0.88) 45%,rgba(10,20,60,0.4) 100%),linear-gradient(to top,rgba(10,20,60,0.9) 0%,transparent 55%)}
 .hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:0 3rem 3.5rem;width:100%}
-.hero-content{width:100%;max-width:1200px}.hero-bottom-row{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:flex-end;margin-top:1.5rem}
+.hero-content{width:100%;max-width:1200px}
+.hero-bottom-row{display:flex;align-items:flex-end;gap:3rem;margin-top:1.5rem}
+.hero-bottom-left{flex:1}
+.hero-stats-side{display:flex;flex-direction:row;gap:2rem;flex-shrink:0;padding-left:2.5rem;border-left:1px solid rgba(255,255,255,0.15);padding-bottom:0.25rem}
+.hero-stat-side-item{text-align:center}
+.hero-stat-side-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:#fff;line-height:1}
+.hero-stat-side-num em{color:var(--accent2);font-style:normal}
+.hero-stat-side-lbl{font-size:0.62rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.3rem}.hero-bottom-row{display:flex;align-items:center;gap:2.5rem;margin-top:2rem;flex-wrap:wrap}
 .hero-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;margin-top:0.75rem;opacity:0;animation:up 0.9s 0.4s ease both}
 .hero-eyebrow-line{width:36px;height:1px;background:var(--accent2)}
 .hero-eyebrow-text{font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent2)}
@@ -112,9 +119,9 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 .hero-title em{font-style:italic;font-weight:300;color:var(--accent2)}
 .hero-sub{font-size:clamp(0.9rem,1.2vw,1.05rem);color:rgba(255,255,255,0.6);max-width:480px;line-height:1.85;margin-bottom:2.5rem;font-weight:300;opacity:0;animation:up 0.9s 0.8s ease both}
 .hero-left{display:flex;flex-direction:column}
-.hero-stats-side{display:flex;flex-direction:column;gap:1.5rem;min-width:180px;padding-bottom:0.5rem;flex-shrink:0}
-.hero-stat-side-item{border-left:2px solid rgba(59,130,246,0.4);padding-left:1.25rem}
-.hero-stat-side-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:#fff;line-height:1}
+.hero-stats-side{display:flex;flex-direction:row;gap:2rem;flex-shrink:0;padding-left:2rem;border-left:1px solid rgba(255,255,255,0.15)}
+.hero-stat-side-item{text-align:center}
+.hero-stat-side-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:#fff;line-height:1}
 .hero-stat-side-num em{color:var(--accent2);font-style:normal}
 .hero-stat-side-lbl{font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:up 0.9s 1s ease both}
@@ -208,10 +215,10 @@ section{padding:6rem 3rem}
 
 /* TOOLS */
 #tools{background:var(--bg2)}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:var(--border2);margin-top:3rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden}
-.tool-item{background:var(--bg2);padding:1.75rem 1rem;text-align:center;transition:background 0.3s}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:var(--border2);margin-top:3rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;position:relative}
+.tool-item{background:var(--bg2);padding:1.75rem 1rem;text-align:center;transition:background 0.3s;overflow:hidden}
 .tool-item:hover{background:var(--bg3)}
-.tool-icon{font-size:1.75rem;margin-bottom:0.6rem}
+.tool-icon{width:40px;height:40px;margin:0 auto 0.6rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem}.tool-icon img{width:40px;height:40px;object-fit:contain}
 .tool-name{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.03em;transition:color 0.3s}
 .tool-item:hover .tool-name{color:var(--text)}
 
@@ -419,44 +426,36 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
   </div>
   <div class="hero-body">
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager &nbsp;·&nbsp; Lagos, Nigeria</span>
-      </div>
       <h1 class="hero-title">
         Turning Clicks<br>
         Into <em>Customers</em><br>
         Through Strategy
       </h1>
-      <p class="hero-sub">I help coaches, consultants, service providers, and growing businesses attract more leads, convert more customers, and increase revenue through conversion-focused funnels, AI-powered workflows, and digital experiences that actually work.</p>
-      <div class="hero-btns">
-        <a href="#work" class="btn-pri">View My Work →</a>
-        <a href="#contact" class="btn-sec">Book a Discovery Call</a>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager &nbsp;·&nbsp; Lagos, Nigeria</span>
       </div>
-    </div>
-  </div>
-  <div class="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat-item"><div class="stat-num">150<em>+</em></div><div class="stat-label">Projects Delivered</div></div>
-      <div class="stat-item"><div class="stat-num">4.9<em>★</em></div><div class="stat-label">Client Rating</div></div>
-      <div class="stat-item"><div class="stat-num">7<em>+</em></div><div class="stat-label">Years Experience</div></div>
-      <div class="stat-item"><div class="stat-num">50<em>+</em></div><div class="stat-label">Verified Reviews</div></div>
-      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Countries Operated</div></div>
+      <div class="hero-bottom-row">
+        <div class="hero-bottom-left">
+          <p class="hero-sub">I help coaches, consultants, service providers, and growing businesses attract more leads, convert more customers, and increase revenue through conversion-focused funnels, AI-powered workflows, and digital experiences that actually work.</p>
+          <div class="hero-btns">
+            <a href="#work" class="btn-pri">View My Work →</a>
+            <a href="#contact" class="btn-sec">Book a Discovery Call</a>
+          </div>
+        </div>
+        <div class="hero-stats-side">
+          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="150" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Projects Delivered</div></div>
+          <div class="hero-stat-side-item"><div class="hero-stat-side-num">4.9<em>★</em></div><div class="hero-stat-side-lbl">Client Rating</div></div>
+          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="7" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Years Experience</div></div>
+          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="50" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Verified Reviews</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- TRUST -->
-<section id="trust">
-  <div class="trust-row">
-    <div class="trust-item reveal"><div class="trust-num">150+</div><div class="trust-lbl">Projects on Fiverr & Upwork</div></div>
-    <div class="trust-item reveal"><div class="trust-num">4.9★</div><div class="trust-lbl">Average Client Rating</div></div>
-    <div class="trust-item reveal"><div class="trust-num">50+</div><div class="trust-lbl">Verified Client Reviews</div></div>
-    <div class="trust-item reveal"><div class="trust-num">7+</div><div class="trust-lbl">Years of Experience</div></div>
-    <div class="trust-item reveal"><div class="trust-num">3</div><div class="trust-lbl">Countries of Operations</div></div>
-    <div class="trust-item reveal"><div class="trust-num">5</div><div class="trust-lbl">Professional Certifications</div></div>
-  </div>
-</section>
+
 
 <!-- SERVICES -->
 <section id="services">
@@ -570,24 +569,31 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
     <h2 class="sec-title">The Stack Behind<br><em>the Results</em></h2>
     <p class="sec-sub">A carefully selected toolkit of industry-leading platforms and AI tools used across every project.</p>
     <div class="tools-grid">
-      <div class="tool-item reveal"><div class="tool-icon">🔶</div><div class="tool-name">GoHighLevel</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🟠</div><div class="tool-name">ClickFunnels</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🔵</div><div class="tool-name">WordPress</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🟣</div><div class="tool-name">Mailchimp</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🔴</div><div class="tool-name">ActiveCampaign</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🟡</div><div class="tool-name">Klaviyo</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🤍</div><div class="tool-name">Anthropic Claude</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🟢</div><div class="tool-name">ChatGPT</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🔷</div><div class="tool-name">Microsoft Copilot</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🌈</div><div class="tool-name">Gemini</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🎨</div><div class="tool-name">Canva</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">📊</div><div class="tool-name">Google Analytics</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">📱</div><div class="tool-name">Meta Ads Manager</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">📝</div><div class="tool-name">Notion</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">💻</div><div class="tool-name">HTML / CSS / JS</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">🛍️</div><div class="tool-name">Shopify</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">⚙️</div><div class="tool-name">Systeme.io</div></div>
-      <div class="tool-item reveal"><div class="tool-icon">📨</div><div class="tool-name">Constant Contact</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-wordpress.svg" alt="WordPress"></div><div class="tool-name">WordPress</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-shopify.svg" alt="Shopify"></div><div class="tool-name">Shopify</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-mailchimp.svg" alt="Mailchimp"></div><div class="tool-name">Mailchimp</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-activecampaign.png" alt="ActiveCampaign"></div><div class="tool-name">ActiveCampaign</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-klaviyo.png" alt="Klaviyo"></div><div class="tool-name">Klaviyo</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-claude.png" alt="Anthropic Claude"></div><div class="tool-name">Anthropic Claude</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gemini.png" alt="Gemini"></div><div class="tool-name">Gemini</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-canva.png" alt="Canva"></div><div class="tool-name">Canva</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-googleanalytics.png" alt="Google Analytics"></div><div class="tool-name">Google Analytics</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-meta.png" alt="Meta Ads Manager"></div><div class="tool-name">Meta Ads Manager</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-notion.png" alt="Notion"></div><div class="tool-name">Notion</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-html5.png" alt="HTML CSS JS"></div><div class="tool-name">HTML / CSS / JS</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-copilot.png" alt="Microsoft Copilot"></div><div class="tool-name">Microsoft Copilot</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gohighlevel.svg" alt="GoHighLevel"></div><div class="tool-name">GoHighLevel</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-clickfunnels.svg" alt="ClickFunnels"></div><div class="tool-name">ClickFunnels</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-systemeio.jpg" alt="Systeme.io"></div><div class="tool-name">Systeme.io</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-constantcontact.png" alt="Constant Contact"></div><div class="tool-name">Constant Contact</div></div>
+  <div class="tool-item reveal"><div class="tool-icon"><img src="https://cdn.simpleicons.org/chatgpt/10A37F" alt="ChatGPT"></div><div class="tool-name">ChatGPT</div></div>
+</div>
+  </div>
+
+</div><div class="tool-name">Constant Contact</div></div>
+    </div><div class="tool-name">Constant Contact</div></div>
+    </div><div class="tool-name">Microsoft Copilot</div></div>
+    </div><div class="tool-name">Constant Contact</div></div>
     </div>
   </div>
 </section>
@@ -715,180 +721,242 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
 </div>
 
 <script>
+// HERO COUNTERS
+function runHeroCounters(){
+  document.querySelectorAll('.h-counter').forEach(function(el){
+    var tgt = +el.dataset.target;
+    var suffix = el.dataset.suffix || '+';
+    var n = 0;
+    var step = Math.ceil(tgt / 60);
+    var t = setInterval(function(){
+      n = Math.min(n + step, tgt);
+      el.textContent = n + suffix;
+      if(n >= tgt) clearInterval(t);
+    }, 28);
+  });
+}
+
 // DATA
-const projects=[
+var projects=[
   {e:'🍪',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build including product uploads, domain connection, and post-launch support.",p:'Shopify',t:'E-commerce'},
   {e:'📝',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog with affiliate links, blog posts, and dark mode deployed on Vercel.',p:'Vercel / GitHub',t:'Blog'},
   {e:'🏥',tags:['Health','Funnel'],title:'Health Coaching Funnel',desc:'Multi-step lead generation funnel for a health coach with opt-in page and automated email follow-up.',p:'ClickFunnels',t:'Funnel'},
   {e:'🏡',tags:['Real Estate','Landing Page'],title:'Real Estate Lead Page',desc:'High-converting landing page for a real estate agent with integrated CRM and lead capture.',p:'GoHighLevel',t:'Landing Page'},
   {e:'📚',tags:['Online Course','Sales Page'],title:'Online Course Sales Page',desc:'Full sales page with VSL section, testimonials, course breakdown, and payment integration.',p:'WordPress',t:'Sales Page'},
-  {e:'💼',tags:['Consultant','Website'],title:'Business Consultant Website',desc:'Full professional website for a Lagos-based consultant including blog, contact form, and SEO.',p:'WordPress',t:'Website'},
+  {e:'💼',tags:['Consultant','Website'],title:'Business Consultant Website',desc:'Full professional website for a Lagos-based consultant including blog, contact form, and SEO.',p:'WordPress',t:'Website'}
 ];
 
-const testimonials=[
+var testimonials=[
   {t:'Onome delivered an outstanding funnel for my coaching business. The quality of work and attention to detail was exceptional. Highly recommend!',n:'Sarah M.',r:'Business Coach, USA',s:5,i:'S'},
   {t:'Fast delivery, professional communication throughout. The landing page he built converted at over 40%, well above our expectations.',n:'James T.',r:'Digital Marketer, UK',s:5,i:'J'},
   {t:'Working with Onome was a pleasure. He understood exactly what we needed and delivered a website that perfectly represents our brand.',n:'Adaeze O.',r:'E-commerce Owner, Nigeria',s:5,i:'A'},
   {t:'Incredible value for money. The email marketing system he set up has completely transformed how we communicate with our audience.',n:'Michael R.',r:'Online Course Creator, Canada',s:5,i:'M'},
   {t:'Onome is a true professional. Delivered our GoHighLevel funnel ahead of schedule with zero revisions needed. Will definitely work with him again.',n:'Lisa K.',r:'Health Coach, Australia',s:5,i:'L'},
-  {t:'The best freelancer I have worked with on Fiverr. Clear communication, fast turnaround, and results that speak for themselves.',n:'David F.',r:'Consultant, USA',s:5,i:'D'},
+  {t:'The best freelancer I have worked with on Fiverr. Clear communication, fast turnaround, and results that speak for themselves.',n:'David F.',r:'Consultant, USA',s:5,i:'D'}
 ];
 
-const faqs=[
+var faqs=[
   {q:'How long does a typical project take?',a:'A landing page takes 3 to 5 business days. A full sales funnel takes 7 to 14 days. A complete website build takes 2 to 4 weeks. Timeline is agreed upfront during the discovery call.'},
   {q:'Which platforms do you work with?',a:'I work with GoHighLevel, ClickFunnels, WordPress, Shopify, Mailchimp, ActiveCampaign, Klaviyo, Vercel, and custom HTML/CSS/JavaScript builds depending on project needs.'},
   {q:'What information do you need to get started?',a:'Brand assets, target audience details, your offer or product information, and any existing copy or content. I guide you through everything during onboarding.'},
   {q:'Do you offer ongoing support after project delivery?',a:'Yes. I offer post-launch support for all projects. For ongoing retainer arrangements, we can discuss a monthly support plan that fits your needs.'},
   {q:'Can you write the copy for my funnel or landing page?',a:'Yes. Conversion copywriting is part of my service offering. I write persuasive, audience-focused copy aligned with your brand voice and optimised for conversions.'},
   {q:'Do you work with clients outside Nigeria?',a:'Absolutely. The majority of my 150+ projects have been for clients in the US, UK, Canada, and Australia. I work fully remotely across all time zones.'},
-  {q:'Are you available for full-time IT Project Manager roles?',a:'Yes. In addition to freelance work, I am actively open to full-time IT Project Manager opportunities. Reach out at onomesamuel@gmail.com.'},
+  {q:'Are you available for full-time IT Project Manager roles?',a:'Yes. In addition to freelance work, I am actively open to full-time IT Project Manager opportunities. Reach out at onomesamuel@gmail.com.'}
 ];
 
-const modals={
+var modals={
   funnel:{icon:'🎯',title:'Funnel Design & Development',desc:'Multi-step sales funnels that guide your prospects from cold awareness to paying customer. Built around your specific audience, offer, and business goals.',feats:['Opt-in pages and lead capture systems','Sales pages with VSL and payment integration','Upsell and downsell sequences','Thank you pages and confirmation flows','Email automation integration','A/B testing and conversion optimisation']},
   landing:{icon:'🚀',title:'Landing Page Design',desc:'High-converting landing pages that turn traffic into leads and customers. Built with strategic copy, compelling design, and conversion-focused structure.',feats:['Above-the-fold hook and headline strategy','Benefit-driven copy and social proof','Mobile-responsive design','CTA optimisation','Lead magnet integration','Analytics and tracking setup']},
   email:{icon:'📧',title:'Email Marketing Systems',desc:'Complete email marketing ecosystems that nurture your audience and drive consistent revenue through automated sequences and broadcast campaigns.',feats:['Welcome sequence setup','Lead nurturing automation','Promotional campaign design','List segmentation strategy','Open rate optimisation','Platform setup and integration']},
   web:{icon:'💻',title:'Website Development',desc:'Full website builds that position your brand professionally and convert visitors into enquiries. From brief to deployment, fully managed.',feats:['Brand identity integration','Responsive design for all devices','SEO foundation setup','Contact forms and lead capture','Blog and content management','Hosting on Vercel']},
   ai:{icon:'🤖',title:'AI-Powered Workflows',desc:'Integrate AI tools into your operations to automate tasks, accelerate content production, and reduce costs while maintaining quality.',feats:['AI content creation workflows','Prompt engineering for your team','AI tool selection and setup','Workflow documentation','Productivity audit','Ongoing AI strategy support']},
-  pm:{icon:'📋',title:'IT Project Management',desc:'Full project lifecycle management from initiation and scoping through execution, stakeholder reporting, and delivery on time and within budget.',feats:['Project scoping and requirements gathering','Resource planning and timeline management','Stakeholder communication and reporting','Risk identification and mitigation','Cross-functional team coordination','Post-delivery review']},
+  pm:{icon:'📋',title:'IT Project Management',desc:'Full project lifecycle management from initiation and scoping through execution, stakeholder reporting, and delivery on time and within budget.',feats:['Project scoping and requirements gathering','Resource planning and timeline management','Stakeholder communication and reporting','Risk identification and mitigation','Cross-functional team coordination','Post-delivery review']}
 };
 
-// RENDER
-const wg=document.getElementById('workGrid');
-projects.forEach(p=>{
-  wg.innerHTML+=`<div class="work-card reveal">
-    <div class="work-img">${p.e}</div>
-    <div class="work-body">
-      <div class="work-tags">${p.tags.map(t=>`<span class="work-tag">${t}</span>`).join('')}</div>
-      <h3 class="work-title">${p.title}</h3>
-      <p class="work-desc">${p.desc}</p>
-      <div class="work-meta">
-        <div class="work-meta-item"><strong>Platform</strong><span>${p.p}</span></div>
-        <div class="work-meta-item"><strong>Type</strong><span>${p.t}</span></div>
-      </div>
-    </div>
-  </div>`;
+// RENDER PROJECTS
+var wg = document.getElementById('workGrid');
+projects.forEach(function(p){
+  var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
+  wg.innerHTML += '<div class="work-card reveal"><div class="work-img">'+p.e+'</div><div class="work-body"><div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div></div></div>';
 });
 
-const tg=document.getElementById('testiGrid');
-testimonials.forEach(t=>{
-  tg.innerHTML+=`<div class="testi-card reveal">
-    <div class="testi-q">"</div>
-    <div class="testi-stars">${'★'.repeat(t.s)}</div>
-    <p class="testi-text">${t.t}</p>
-    <div class="testi-author">
-      <div class="testi-av">${t.i}</div>
-      <div><div class="testi-name">${t.n}</div><div class="testi-role">${t.r}</div></div>
-    </div>
-  </div>`;
+// RENDER TESTIMONIALS
+var tg = document.getElementById('testiGrid');
+testimonials.forEach(function(t){
+  var stars = '';
+  for(var i=0;i<t.s;i++) stars += '★';
+  tg.innerHTML += '<div class="testi-card reveal"><div class="testi-q">"</div><div class="testi-stars">'+stars+'</div><p class="testi-text">'+t.t+'</p><div class="testi-author"><div class="testi-av">'+t.i+'</div><div><div class="testi-name">'+t.n+'</div><div class="testi-role">'+t.r+'</div></div></div></div>';
 });
 
-const fl=document.getElementById('faqList');
-faqs.forEach((f,i)=>{
-  fl.innerHTML+=`<div class="faq-item" id="fi${i}">
-    <div class="faq-q" onclick="toggleFaq(${i})">${f.q}<div class="faq-ico">+</div></div>
-    <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
-  </div>`;
+// RENDER FAQ
+var fl = document.getElementById('faqList');
+faqs.forEach(function(f, i){
+  fl.innerHTML += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" onclick="toggleFaq('+i+')">'+f.q+'<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-inner">'+f.a+'</div></div></div>';
 });
 function toggleFaq(i){
-  const el=document.getElementById('fi'+i),was=el.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(e=>e.classList.remove('open'));
-  if(!was)el.classList.add('open');
+  var el = document.getElementById('fi'+i);
+  var was = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(e){ e.classList.remove('open'); });
+  if(!was) el.classList.add('open');
 }
 
 // FORM
-const steps=[
-  {l:'What type of business do you run?',type:'opts',opts:['Coach / Consultant','E-commerce','Service Provider','Online Course Creator','Personal Brand','Other']},
-  {l:'What service do you need?',type:'opts',opts:['Funnel Design','Landing Page','Email Marketing','Website Development','AI Workflow Setup','IT Project Management']},
-  {l:'What is your project budget?',type:'opts',opts:['Under $500','$500 to $1,000','$1,000 to $3,000','$3,000+','Let us discuss']},
-  {l:'What is your timeline?',type:'opts',opts:['ASAP','Within 2 weeks','Within a month','Flexible']},
-  {l:'Your contact details',type:'inputs'},
+var WEB3_KEY = 'fc4840df-9da9-4874-a7ec-19f2143038ba';
+var formSteps = [
+  {l:'What type of business do you run?', type:'opts', opts:['Coach / Consultant','E-commerce','Service Provider','Online Course Creator','Personal Brand','Other']},
+  {l:'What service do you need?', type:'opts', opts:['Funnel Design','Landing Page','Email Marketing','Website Development','AI Workflow Setup','IT Project Management']},
+  {l:'What is your project budget?', type:'opts', opts:['Under $500','$500 to $1,000','$1,000 to $3,000','$3,000+','Let us discuss']},
+  {l:'What is your timeline?', type:'opts', opts:['ASAP','Within 2 weeks','Within a month','Flexible']},
+  {l:'Your contact details', type:'inputs'}
 ];
-let cStep=0,sels=[];
+var cStep = 0, sels = [];
+
 function renderForm(){
-  document.getElementById('formProg').innerHTML=steps.map((_,i)=>`<div class="form-dot ${i<=cStep?'on':''}"></div>`).join('');
-  const s=steps[cStep];
-  let h=`<span class="form-lbl">Step ${cStep+1} of ${steps.length}: ${s.l}</span>`;
-  if(s.type==='opts'){
-    h+=`<div class="form-opts">${s.opts.map(o=>`<div class="form-opt ${sels[cStep]===o?'on':''}" onclick="selOpt('${o}',this)">${o}</div>`).join('')}</div>`;
-  } else {
-    h+=`<input class="form-inp" type="text" placeholder="Your full name">
-        <input class="form-inp" type="email" placeholder="Your email address">
-        <input class="form-inp" type="tel" placeholder="Your phone number (optional)">
-        <textarea class="form-inp" rows="3" placeholder="Brief project description..."></textarea>`;
+  var prog = '';
+  for(var i=0; i<formSteps.length; i++){
+    prog += '<div class="form-dot '+(i<=cStep?'on':'')+'"></div>';
   }
-  h+=`<div class="form-nav">
-    <span class="form-step-lbl">Step ${cStep+1} of ${steps.length}</span>
-    <div style="display:flex;gap:.75rem">${cStep>0?'<button class="btn-back" onclick="prevS()">Back</button>':''}<button class="btn-form" onclick="nextS()">${cStep===steps.length-1?'Send Message →':'Next →'}</button></div>
-  </div>`;
-  document.getElementById('formSteps').innerHTML=h;
+  document.getElementById('formProg').innerHTML = prog;
+  var s = formSteps[cStep];
+  var h = '<span class="form-lbl">Step '+(cStep+1)+' of '+formSteps.length+': '+s.l+'</span>';
+  if(s.type === 'opts'){
+    h += '<div class="form-opts">';
+    for(var j=0; j<s.opts.length; j++){
+      var o = s.opts[j];
+      h += '<div class="form-opt '+(sels[cStep]===o?'on':'')+'" onclick="selOpt(this)">'+o+'</div>';
+    }
+    h += '</div>';
+  } else {
+    h += '<input class="form-inp" id="f-name" type="text" placeholder="Your full name">';
+    h += '<input class="form-inp" id="f-email" type="email" placeholder="Your email address">';
+    h += '<input class="form-inp" id="f-phone" type="tel" placeholder="Your phone number (optional)">';
+    h += '<textarea class="form-inp" id="f-msg" rows="3" placeholder="Brief project description..."></textarea>';
+  }
+  var backBtn = cStep > 0 ? '<button class="btn-back" onclick="prevS()">Back</button>' : '';
+  var nextLbl = cStep === formSteps.length - 1 ? 'Send Message &rarr;' : 'Next &rarr;';
+  h += '<div class="form-nav"><span class="form-step-lbl">Step '+(cStep+1)+' of '+formSteps.length+'</span><div style="display:flex;gap:.75rem">'+backBtn+'<button class="btn-form" id="submitBtn" onclick="nextS()">'+nextLbl+'</button></div></div>';
+  document.getElementById('formSteps').innerHTML = h;
 }
-function selOpt(v,el){sels[cStep]=v;document.querySelectorAll('.form-opt').forEach(o=>o.classList.remove('on'));el.classList.add('on');}
-function nextS(){if(cStep<steps.length-1){cStep++;renderForm();}else{document.getElementById('formSteps').style.display='none';document.getElementById('formProg').style.display='none';document.getElementById('formOk').style.display='block';}}
-function prevS(){if(cStep>0){cStep--;renderForm();}}
+
+function selOpt(el){
+  sels[cStep] = el.textContent;
+  var opts = document.querySelectorAll('.form-opt');
+  for(var i=0; i<opts.length; i++) opts[i].classList.remove('on');
+  el.classList.add('on');
+}
+
+function nextS(){
+  if(cStep < formSteps.length - 1){ cStep++; renderForm(); return; }
+  var nameEl = document.getElementById('f-name');
+  var emailEl = document.getElementById('f-email');
+  var phoneEl = document.getElementById('f-phone');
+  var msgEl = document.getElementById('f-msg');
+  var name = nameEl ? nameEl.value.trim() : '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var phone = phoneEl ? phoneEl.value.trim() : '';
+  var msg = msgEl ? msgEl.value.trim() : '';
+  if(!name || !email){ alert('Please fill in your name and email.'); return; }
+  var btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  var payload = {
+    access_key: WEB3_KEY,
+    subject: 'New Project Enquiry from SammieDigital Website',
+    from_name: name,
+    email: email,
+    message: 'New enquiry\n\nName: '+name+'\nEmail: '+email+'\nPhone: '+(phone||'Not provided')+'\n\nBusiness Type: '+(sels[0]||'Not specified')+'\nService Needed: '+(sels[1]||'Not specified')+'\nBudget: '+(sels[2]||'Not specified')+'\nTimeline: '+(sels[3]||'Not specified')+'\n\nMessage:\n'+msg,
+    botcheck: false
+  };
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).then(function(res){ return res.json(); }).then(function(data){
+    if(data.success){
+      document.getElementById('formSteps').style.display = 'none';
+      document.getElementById('formProg').style.display = 'none';
+      document.getElementById('formOk').style.display = 'block';
+    } else {
+      btn.textContent = 'Send Message'; btn.disabled = false;
+      alert('Something went wrong. Please email onomesamuel@gmail.com directly.');
+    }
+  }).catch(function(){
+    btn.textContent = 'Send Message'; btn.disabled = false;
+    alert('Network error. Please email onomesamuel@gmail.com directly.');
+  });
+}
+
+function prevS(){ if(cStep > 0){ cStep--; renderForm(); } }
 renderForm();
 
 // MODAL
 function openModal(k){
-  const m=modals[k];
-  document.getElementById('modalBox').innerHTML=`
-    <button class="modal-x" onclick="closeModal()">✕</button>
-    <div class="modal-icon">${m.icon}</div>
-    <h3 class="modal-title">${m.title}</h3>
-    <p class="modal-desc">${m.desc}</p>
-    <div class="modal-feats">${m.feats.map(f=>`<div class="modal-feat">${f}</div>`).join('')}</div>
-    <a href="#contact" onclick="closeModal()" class="btn-pri" style="display:inline-flex;margin-top:2rem;">Get Started →</a>`;
+  var m = modals[k];
+  var feats = m.feats.map(function(f){ return '<div class="modal-feat">'+f+'</div>'; }).join('');
+  document.getElementById('modalBox').innerHTML = '<button class="modal-x" onclick="closeModal()">&#10005;</button><div class="modal-icon">'+m.icon+'</div><h3 class="modal-title">'+m.title+'</h3><p class="modal-desc">'+m.desc+'</p><div class="modal-feats">'+feats+'</div><a href="#contact" onclick="closeModal()" class="btn-pri" style="display:inline-flex;margin-top:2rem;">Get Started &rarr;</a>';
   document.getElementById('modalBg').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(){document.getElementById('modalBg').classList.remove('open');document.body.style.overflow='';}
-function closeModalOut(e){if(e.target===document.getElementById('modalBg'))closeModal();}
+function closeModal(){ document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow = ''; }
+function closeModalOut(e){ if(e.target === document.getElementById('modalBg')) closeModal(); }
 
 // SCROLL REVEAL
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+var obs = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); }
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 
 // COUNTERS
-const cobs=new IntersectionObserver(es=>{
-  es.forEach(e=>{
+var cobs = new IntersectionObserver(function(es){
+  es.forEach(function(e){
     if(e.isIntersecting){
-      const el=e.target,tgt=+el.dataset.target;
-      let n=0;const step=Math.ceil(tgt/60);
-      const t=setInterval(()=>{n=Math.min(n+step,tgt);el.textContent=n+(tgt>=50?'+':'');if(n>=tgt)clearInterval(t);},25);
+      var el = e.target, tgt = +el.dataset.target;
+      var n = 0, step = Math.ceil(tgt/60);
+      var t = setInterval(function(){ n = Math.min(n+step,tgt); el.textContent = n+'+'; if(n>=tgt) clearInterval(t); }, 25);
       cobs.unobserve(el);
     }
   });
-},{threshold:0.5});
-document.querySelectorAll('.counter').forEach(el=>cobs.observe(el));
+}, {threshold: 0.5});
+document.querySelectorAll('.counter').forEach(function(el){ cobs.observe(el); });
 
-// NAV SCROLL
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+// NAV
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
 
 // THEME TOGGLE
-const toggle=document.getElementById('themeToggle');
-let dark=true;
-toggle.addEventListener('click',()=>{
-  dark=!dark;
-  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
-  toggle.textContent=dark?'☀️':'🌙';
+var themeToggle = document.getElementById('themeToggle');
+var isDark = true;
+themeToggle.addEventListener('click', function(){
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeToggle.textContent = isDark ? '☀️' : '🌙';
 });
 
 // CURSOR
-const cur=document.getElementById('cursor'),cf=document.getElementById('cf');
-let mx=0,my=0,fx=0,fy=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function anim(){fx+=(mx-fx)*0.12;fy+=(my-fy)*0.12;cf.style.left=fx+'px';cf.style.top=fy+'px';requestAnimationFrame(anim);})();
-document.querySelectorAll('a,button,.svc-card,.work-card,.faq-q,.form-opt,.tool-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.classList.add('big');cf.classList.add('big');});
-  el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cf.classList.remove('big');});
+var cur = document.getElementById('cursor'), cf = document.getElementById('cf');
+var mx = 0, my = 0, fx = 0, fy = 0;
+document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; cur.style.left = mx+'px'; cur.style.top = my+'px'; });
+(function anim(){ fx += (mx-fx)*0.12; fy += (my-fy)*0.12; cf.style.left = fx+'px'; cf.style.top = fy+'px'; requestAnimationFrame(anim); })();
+document.querySelectorAll('a,button,.svc-card,.work-card,.faq-q,.form-opt,.tool-item').forEach(function(el){
+  el.addEventListener('mouseenter', function(){ cur.classList.add('big'); cf.classList.add('big'); });
+  el.addEventListener('mouseleave', function(){ cur.classList.remove('big'); cf.classList.remove('big'); });
 });
 
 // HAMBURGER
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
-function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+document.getElementById('hamburger').addEventListener('click', function(){ document.getElementById('mobileMenu').classList.toggle('open'); });
+function closeMobile(){ document.getElementById('mobileMenu').classList.remove('open'); }
 
 // LOADER
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hidden'),2100));
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    document.getElementById('loader').classList.add('hidden');
+    setTimeout(runHeroCounters, 500);
+  }, 2100);
+});
 </script>
 </body>
 </html>
