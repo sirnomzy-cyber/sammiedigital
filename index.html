@@ -218,7 +218,7 @@ section{padding:6rem 3rem}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:var(--border2);margin-top:3rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;position:relative}
 .tool-item{background:var(--bg2);padding:1.75rem 1rem;text-align:center;transition:background 0.3s;overflow:hidden}
 .tool-item:hover{background:var(--bg3)}
-.tool-icon{width:40px;height:40px;margin:0 auto 0.6rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem}.tool-icon img{width:40px;height:40px;object-fit:contain}
+.tool-icon{width:40px;height:40px;margin:0 auto 0.6rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem}.tool-icon img{width:40px;height:40px;object-fit:contain;display:block;margin:0 auto}
 .tool-name{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.03em;transition:color 0.3s}
 .tool-item:hover .tool-name{color:var(--text)}
 
@@ -565,35 +565,27 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
 <!-- TOOLS -->
 <section id="tools">
   <div class="container">
-    <div class="sec-label">Tools & Expertise</div>
+    <div class="sec-label">Tools &amp; Expertise</div>
     <h2 class="sec-title">The Stack Behind<br><em>the Results</em></h2>
     <p class="sec-sub">A carefully selected toolkit of industry-leading platforms and AI tools used across every project.</p>
     <div class="tools-grid">
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-wordpress.svg" alt="WordPress"></div><div class="tool-name">WordPress</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-shopify.svg" alt="Shopify"></div><div class="tool-name">Shopify</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-mailchimp.svg" alt="Mailchimp"></div><div class="tool-name">Mailchimp</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-activecampaign.png" alt="ActiveCampaign"></div><div class="tool-name">ActiveCampaign</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-klaviyo.png" alt="Klaviyo"></div><div class="tool-name">Klaviyo</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-claude.png" alt="Anthropic Claude"></div><div class="tool-name">Anthropic Claude</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gemini.png" alt="Gemini"></div><div class="tool-name">Gemini</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-canva.png" alt="Canva"></div><div class="tool-name">Canva</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-googleanalytics.png" alt="Google Analytics"></div><div class="tool-name">Google Analytics</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-meta.png" alt="Meta Ads Manager"></div><div class="tool-name">Meta Ads Manager</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-notion.png" alt="Notion"></div><div class="tool-name">Notion</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-html5.png" alt="HTML CSS JS"></div><div class="tool-name">HTML / CSS / JS</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-copilot.png" alt="Microsoft Copilot"></div><div class="tool-name">Microsoft Copilot</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gohighlevel.svg" alt="GoHighLevel"></div><div class="tool-name">GoHighLevel</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-clickfunnels.svg" alt="ClickFunnels"></div><div class="tool-name">ClickFunnels</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-systemeio.jpg" alt="Systeme.io"></div><div class="tool-name">Systeme.io</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="logo-constantcontact.png" alt="Constant Contact"></div><div class="tool-name">Constant Contact</div></div>
-  <div class="tool-item reveal"><div class="tool-icon"><img src="https://cdn.simpleicons.org/chatgpt/10A37F" alt="ChatGPT"></div><div class="tool-name">ChatGPT</div></div>
-</div>
-  </div>
-
-</div><div class="tool-name">Constant Contact</div></div>
-    </div><div class="tool-name">Constant Contact</div></div>
-    </div><div class="tool-name">Microsoft Copilot</div></div>
-    </div><div class="tool-name">Constant Contact</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-wordpress.svg" alt="WordPress"></div><div class="tool-name">WordPress</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-shopify.svg" alt="Shopify"></div><div class="tool-name">Shopify</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-mailchimp.svg" alt="Mailchimp"></div><div class="tool-name">Mailchimp</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-activecampaign.png" alt="ActiveCampaign"></div><div class="tool-name">ActiveCampaign</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-klaviyo.png" alt="Klaviyo"></div><div class="tool-name">Klaviyo</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-claude.png" alt="Anthropic Claude"></div><div class="tool-name">Anthropic Claude</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gemini.png" alt="Gemini"></div><div class="tool-name">Gemini</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-canva.png" alt="Canva"></div><div class="tool-name">Canva</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-googleanalytics.png" alt="Google Analytics"></div><div class="tool-name">Google Analytics</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-meta.png" alt="Meta Ads Manager"></div><div class="tool-name">Meta Ads Manager</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-notion.png" alt="Notion"></div><div class="tool-name">Notion</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-html5.png" alt="HTML CSS JS"></div><div class="tool-name">HTML / CSS / JS</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-copilot.png" alt="Microsoft Copilot"></div><div class="tool-name">Microsoft Copilot</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-gohighlevel.svg" alt="GoHighLevel"></div><div class="tool-name">GoHighLevel</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-clickfunnels.svg" alt="ClickFunnels"></div><div class="tool-name">ClickFunnels</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-systemeio.jpg" alt="Systeme.io"></div><div class="tool-name">Systeme.io</div></div>
+      <div class="tool-item reveal"><div class="tool-icon"><img src="logo-constantcontact.png" alt="Constant Contact"></div><div class="tool-name">Constant Contact</div></div>
     </div>
   </div>
 </section>
