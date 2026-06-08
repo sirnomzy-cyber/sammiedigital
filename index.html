@@ -98,7 +98,7 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 
 /* HERO */
 #hero{position:relative;height:100vh;min-height:680px;display:flex;flex-direction:column;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;background:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1800&q=85&auto=format&fit=crop') center/cover no-repeat}
+.hero-bg{position:absolute;inset:0;z-index:0;background:url('photo-hero.png') center top/cover no-repeat}
 [data-theme="light"] .hero-bg{filter:brightness(0.75)}
 .hero-overlay{position:absolute;inset:0;z-index:1}
 [data-theme="dark"] .hero-overlay{background:linear-gradient(105deg,rgba(2,6,23,0.93) 45%,rgba(2,6,23,0.45) 100%),linear-gradient(to top,rgba(2,6,23,1) 0%,transparent 55%)}
@@ -203,7 +203,9 @@ section{padding:6rem 3rem}
 .about-cert-sub{font-size:0.73rem;color:var(--muted)}
 
 /* PROCESS */
-#process{background:var(--bg)}
+#process{background:var(--bg);position:relative}
+#process::before{content:"";position:absolute;inset:0;background:url("photo-process.png") center/cover no-repeat;opacity:0.08;z-index:0}
+#process .container{position:relative;z-index:1}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden}
 .proc-step{padding:2.25rem 1.75rem;border-right:1px solid var(--border2);transition:background 0.3s;position:relative}
 .proc-step:last-child{border-right:none}
@@ -228,7 +230,8 @@ section{padding:6rem 3rem}
 .work-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:all 0.35s;cursor:pointer}
 .work-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
 .work-img{aspect-ratio:16/9;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
-.work-img::after{content:'View Project →';position:absolute;inset:0;background:rgba(59,130,246,0.9);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s}
+.work-img-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s;text-decoration:none}
+.work-card:hover .work-img-overlay{opacity:1}
 .work-card:hover .work-img::after{opacity:1}
 .work-body{padding:1.75rem}
 .work-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.875rem}
@@ -240,7 +243,9 @@ section{padding:6rem 3rem}
 .work-meta-item span{font-size:0.72rem;color:var(--muted)}
 
 /* TESTIMONIALS */
-#testimonials{background:var(--bg2)}
+#testimonials{background:var(--bg2);position:relative}
+#testimonials::before{content:"";position:absolute;inset:0;background:url("photo-testimonials.png") center/cover no-repeat;opacity:0.06;z-index:0}
+#testimonials .container{position:relative;z-index:1}
 .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3.5rem}
 .testi-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:2.25rem;transition:all 0.3s}
 .testi-card:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-2px)}
@@ -253,7 +258,9 @@ section{padding:6rem 3rem}
 .testi-role{font-size:0.73rem;color:var(--muted)}
 
 /* RESULTS */
-#results{background:var(--bg)}
+#results{background:var(--bg);position:relative}
+#results::before{content:"";position:absolute;inset:0;background:url("photo-results.png") center/cover no-repeat;opacity:0.08;z-index:0}
+#results .container{position:relative;z-index:1}
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border2);margin-top:3.5rem;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden}
 .result-item{background:var(--bg2);padding:2.5rem 1.5rem;text-align:center;transition:background 0.3s;position:relative}
 .result-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
@@ -276,7 +283,8 @@ section{padding:6rem 3rem}
 
 /* CONTACT */
 #contact{background:var(--bg);position:relative;overflow:hidden}
-#contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%);pointer-events:none}
+#contact::before{content:"";position:absolute;inset:0;background:url("photo-contact.png") center/cover no-repeat;opacity:0.07;z-index:0;pointer-events:none}
+#contact .container{position:relative;z-index:1}
 .contact-wrap{max-width:660px;margin:0 auto;position:relative}
 .contact-form-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:3rem;margin-top:3rem}
 .form-prog{display:flex;gap:0.5rem;margin-bottom:2.5rem}
@@ -521,7 +529,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
   <div class="container">
     <div class="about-wrap">
       <div class="about-img-wrap reveal">
-        <img src="onome-about.png" alt="Onome Ahorituwere" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;display:block;border:1px solid var(--border2)">
+        <img src="photo-about.png" alt="Onome Ahorituwere" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;display:block;border:1px solid var(--border2)">
         <div class="about-badge">
           <div class="about-badge-num">7+</div>
           <div class="about-badge-lbl">Years of Mastery</div>
@@ -731,12 +739,12 @@ function runHeroCounters(){
 
 // DATA
 var projects=[
-  {e:'🍪',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build including product uploads, domain connection, and post-launch support.",p:'Shopify',t:'E-commerce'},
-  {e:'📝',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog with affiliate links, blog posts, and dark mode deployed on Vercel.',p:'Vercel / GitHub',t:'Blog'},
-  {e:'🏥',tags:['Health','Funnel'],title:'Health Coaching Funnel',desc:'Multi-step lead generation funnel for a health coach with opt-in page and automated email follow-up.',p:'ClickFunnels',t:'Funnel'},
-  {e:'🏡',tags:['Real Estate','Landing Page'],title:'Real Estate Lead Page',desc:'High-converting landing page for a real estate agent with integrated CRM and lead capture.',p:'GoHighLevel',t:'Landing Page'},
-  {e:'📚',tags:['Online Course','Sales Page'],title:'Online Course Sales Page',desc:'Full sales page with VSL section, testimonials, course breakdown, and payment integration.',p:'WordPress',t:'Sales Page'},
-  {e:'💼',tags:['Consultant','Website'],title:'Business Consultant Website',desc:'Full professional website for a Lagos-based consultant including blog, contact form, and SEO.',p:'WordPress',t:'Website'}
+  {url:'https://tasteescookies.com/',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build covering product uploads, domain connection, custom design, and post-launch support for a Nigerian cookie brand.",p:'Shopify',t:'E-commerce'},
+  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow. Deployed on Vercel via GitHub.',p:'Vercel / GitHub',t:'Blog'},
+  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout for a medical practice.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and integrated lead capture for a luxury resort.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity built for a premium bakery business.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Business Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and a bold editorial design with strong visual impact.',p:'HTML / CSS / JS',t:'Business Website'}
 ];
 
 var testimonials=[
@@ -771,7 +779,8 @@ var modals={
 var wg = document.getElementById('workGrid');
 projects.forEach(function(p){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
-  wg.innerHTML += '<div class="work-card reveal"><div class="work-img">'+p.e+'</div><div class="work-body"><div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div></div></div>';
+  var img = '<div class="work-img" style="background:url(https://api.microlink.io/?url='+encodeURIComponent(p.url)+'&screenshot=true&meta=false&embed=screenshot.url) center/cover no-repeat;"><a href="'+p.url+'" target="_blank" class="work-img-overlay">View Live Site &rarr;</a></div>';
+  wg.innerHTML += '<div class="work-card reveal">'+img+'<div class="work-body"><div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site &rarr;</a></div></div>';
 });
 
 // RENDER TESTIMONIALS
