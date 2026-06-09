@@ -124,7 +124,7 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 .hero-stat-side-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:#fff;line-height:1}
 .hero-stat-side-num em{color:var(--accent2);font-style:normal}
 .hero-stat-side-lbl{font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:up 0.9s 1s ease both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:up 0.9s 0.9s ease both}
 .btn-pri{background:var(--accent);color:#fff;padding:0.9rem 2.25rem;border-radius:4px;font-weight:600;text-decoration:none;font-size:0.875rem;transition:all 0.25s;letter-spacing:0.04em}
 .btn-pri:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(59,130,246,0.4)}
 .btn-sec{background:transparent;color:#fff;padding:0.9rem 2.25rem;border-radius:4px;font-weight:400;text-decoration:none;font-size:0.875rem;border:1px solid rgba(255,255,255,0.3);transition:all 0.25s;letter-spacing:0.04em}
@@ -203,8 +203,8 @@ section{padding:6rem 3rem}
 .about-cert-sub{font-size:0.73rem;color:var(--muted)}
 
 /* PROCESS */
-#process{background:var(--bg);position:relative;overflow:visible}
-#process::before{content:"";position:absolute;top:-120px;left:0;right:0;bottom:0;background:url("photo-process2.png") center top/cover no-repeat;opacity:0.22;z-index:0}
+#process{background:var(--bg);position:relative;overflow:hidden}
+#process::before{content:"";position:absolute;top:0;left:0;right:0;bottom:-80px;background:url("photo-process2.png") center 20%/cover no-repeat;opacity:0.25;z-index:0}
 #process .container{position:relative;z-index:1}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4rem;border:1px solid rgba(59,130,246,0.2);border-radius:var(--radius);overflow:hidden}
 .proc-step{padding:2.25rem 1.75rem;border-right:1px solid var(--border2);transition:background 0.3s;position:relative;background:rgba(9,17,35,0.82);backdrop-filter:blur(8px)}
@@ -234,7 +234,6 @@ section{padding:6rem 3rem}
 .work-card:hover .work-img img{transform:scale(1.03)}
 .work-img-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s;text-decoration:none}
 .work-card:hover .work-img-overlay{opacity:1}
-.work-iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none;border-radius:0}
 .work-img{position:relative;overflow:hidden}
 .work-card:hover .work-img::after{opacity:1}
 .work-body{padding:1.75rem}
@@ -247,9 +246,7 @@ section{padding:6rem 3rem}
 .work-meta-item span{font-size:0.72rem;color:var(--muted)}
 
 /* TESTIMONIALS */
-#testimonials{background-color:var(--bg2);background-image:url("photo-testimonials.png");background-size:cover;background-position:center;background-attachment:fixed;position:relative}
-#testimonials::before{content:"";position:absolute;inset:0;background:rgba(9,15,30,0.88);z-index:0}
-#testimonials .container{position:relative;z-index:1}
+#testimonials{background:var(--bg2);position:relative}
 .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3.5rem}
 .testi-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:2.25rem;transition:all 0.3s}
 .testi-card:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-2px)}
@@ -288,7 +285,7 @@ section{padding:6rem 3rem}
 /* CONTACT */
 #contact{background-color:var(--bg);background-image:url("photo-contact.png");background-size:cover;background-position:center;background-attachment:fixed;position:relative}
 #contact::before{content:"";position:absolute;inset:0;background:rgba(2,6,23,0.9);z-index:0}
-#contact .container{position:relative;z-index:1;position:relative}
+#contact .container{position:relative;z-index:1}
 .contact-wrap{max-width:660px;margin:0 auto;position:relative}
 .contact-form-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:3rem;margin-top:3rem}
 .form-prog{display:flex;gap:0.5rem;margin-bottom:2.5rem}
@@ -453,7 +450,7 @@ section{transform:translateZ(0)}
       </h1>
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager &nbsp;·&nbsp; Lagos, Nigeria</span>
+        <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager</span>
       </div>
       <div class="hero-bottom-row">
         <div class="hero-bottom-left">
@@ -564,7 +561,7 @@ section{transform:translateZ(0)}
 </section>
 
 <!-- PROCESS -->
-<section id="process">
+<section id="process" style="padding-top:8rem">
   <div class="container">
     <div class="sec-label">How I Work</div>
     <h2 class="sec-title">A Process Built<br>for <em>Results</em></h2>
@@ -790,10 +787,44 @@ var modals={
 
 // RENDER PROJECTS
 var wg = document.getElementById('workGrid');
+var fallbackColors = ['#0F4C81','#1a1a2e','#0d3b2e','#2d1b4e','#4a1942','#1a2a1a'];
 projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
   var screenshotUrl = 'https://api.screenshotone.com/take?url='+encodeURIComponent(p.url)+'&viewport_width=1280&viewport_height=800&format=jpg&image_quality=80&block_ads=true&delay=2';
-  var fallbackColors = ['#0F4C81','#1a1a2e','#0d3b2e','#2d1b4e','#4a1942','#1a2a1a'];
+
+  var card = document.createElement('div');
+  card.className = 'work-card reveal';
+
+  var imgWrap = document.createElement('div');
+  imgWrap.className = 'work-img';
+
+  var img = document.createElement('img');
+  img.src = screenshotUrl;
+  img.alt = p.title;
+  img.loading = 'lazy';
+  img.onerror = (function(color, wrap) {
+    return function() { this.style.display = 'none'; wrap.style.background = color; };
+  })(fallbackColors[idx % 6], imgWrap);
+
+  var ol = document.createElement('a');
+  ol.href = p.url;
+  ol.target = '_blank';
+  ol.className = 'work-img-overlay';
+  ol.textContent = 'View Live Site →';
+
+  imgWrap.appendChild(img);
+  imgWrap.appendChild(ol);
+
+  var body = document.createElement('div');
+  body.className = 'work-body';
+  body.innerHTML = '<div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site →</a>';
+
+  card.appendChild(imgWrap);
+  card.appendChild(body);
+  wg.appendChild(card);
+
+  // Trigger reveal directly
+  setTimeout(function(){ card.classList.add('on'); }, 100 * idx);
 });
 
 // RENDER TESTIMONIALS
