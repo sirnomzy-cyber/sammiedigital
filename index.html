@@ -149,6 +149,62 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
 
+/* ── SCROLL-REVEAL BASE ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s cubic-bezier(.22,1,.36,1),transform 0.7s cubic-bezier(.22,1,.36,1)}
+.reveal.on{opacity:1;transform:none}
+
+/* Directional variants */
+.reveal-left{opacity:0;transform:translateX(-48px);transition:opacity 0.75s cubic-bezier(.22,1,.36,1),transform 0.75s cubic-bezier(.22,1,.36,1)}
+.reveal-left.on{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(48px);transition:opacity 0.75s cubic-bezier(.22,1,.36,1),transform 0.75s cubic-bezier(.22,1,.36,1)}
+.reveal-right.on{opacity:1;transform:none}
+.reveal-zoom{opacity:0;transform:scale(0.92);transition:opacity 0.7s cubic-bezier(.22,1,.36,1),transform 0.7s cubic-bezier(.22,1,.36,1)}
+.reveal-zoom.on{opacity:1;transform:scale(1)}
+
+/* Stagger delays for grid children */
+.reveal-stagger > *{opacity:0;transform:translateY(28px);transition:opacity 0.65s cubic-bezier(.22,1,.36,1),transform 0.65s cubic-bezier(.22,1,.36,1)}
+.reveal-stagger.on > *{opacity:1;transform:none}
+.reveal-stagger.on > *:nth-child(1){transition-delay:0s}
+.reveal-stagger.on > *:nth-child(2){transition-delay:0.08s}
+.reveal-stagger.on > *:nth-child(3){transition-delay:0.16s}
+.reveal-stagger.on > *:nth-child(4){transition-delay:0.24s}
+.reveal-stagger.on > *:nth-child(5){transition-delay:0.32s}
+.reveal-stagger.on > *:nth-child(6){transition-delay:0.40s}
+.reveal-stagger.on > *:nth-child(7){transition-delay:0.48s}
+.reveal-stagger.on > *:nth-child(8){transition-delay:0.56s}
+
+/* ── TYPEWRITER on hero sub-heading ── */
+.typewriter-wrap{display:inline-block;overflow:hidden}
+@keyframes typewrite{from{max-width:0}to{max-width:100%}}
+@keyframes blink{0%,100%{border-color:var(--accent2)}50%{border-color:transparent}}
+
+/* ── BUTTON GLOW PULSE ── */
+@keyframes glow-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}
+  50%{box-shadow:0 0 20px 5px rgba(59,130,246,0.4)}
+}
+.btn-pri{animation:glow-pulse 3s ease-in-out 2.5s infinite}
+.btn-pri:hover{animation:none;box-shadow:0 10px 30px rgba(59,130,246,0.4)}
+
+/* ── SECTION LABEL LINE DRAW ── */
+.sec-label{opacity:0;transform:translateX(-20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.sec-label.on{opacity:1;transform:none}
+.sec-label::before{width:0;transition:width 0.6s ease 0.25s}
+.sec-label.on::before{width:24px}
+
+/* ── TRUST / RESULT ZOOM-IN ── */
+.trust-item{opacity:0;transform:scale(0.93);transition:opacity 0.55s ease,transform 0.55s ease}
+.trust-item.on{opacity:1;transform:scale(1)}
+.result-item{opacity:0;transform:scale(0.93);transition:opacity 0.55s ease,transform 0.55s ease}
+.result-item.on{opacity:1;transform:scale(1)}
+
+/* ── PROCESS STEPS SLIDE UP ── */
+.proc-step{opacity:0;transform:translateY(36px);transition:opacity 0.6s ease,transform 0.6s ease,background 0.3s}
+.proc-step.on{opacity:1;transform:none}
+
+/* ── CARD HOVER LIFT ── */
+.svc-card:hover,.testi-card:hover{transform:translateY(-5px)}
+
 /* SECTIONS */
 section{padding:6rem 3rem}
 .container{max-width:1200px;margin:0 auto}
@@ -445,7 +501,7 @@ section{transform:translateZ(0)}
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager</span>
+        <span class="hero-eyebrow-text" id="heroTypewriter"></span>
       </div>
       <h1 class="hero-title">
         Turning Clicks<br>
@@ -464,7 +520,7 @@ section{transform:translateZ(0)}
           <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="150" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Projects Delivered</div></div>
           <div class="hero-stat-side-item"><div class="hero-stat-side-num">4.9<em>★</em></div><div class="hero-stat-side-lbl">Client Rating</div></div>
           <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="7" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Years Experience</div></div>
-          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="50" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Verified Reviews</div></div>
+          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="50" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Satisfied Clients</div></div>
         </div>
       </div>
     </div>
@@ -478,9 +534,9 @@ section{transform:translateZ(0)}
 <section id="services">
   <div class="container">
     <div class="sec-label">What I Do</div>
-    <h2 class="sec-title">Services Built to<br>Drive <em>Real Results</em></h2>
-    <p class="sec-sub">Every service is engineered around one goal — measurable business growth for your brand.</p>
-    <div class="svc-grid">
+    <h2 class="sec-title reveal-zoom">Services Built to<br>Drive <em>Real Results</em></h2>
+    <p class="sec-sub reveal">Every service is engineered around one goal — measurable business growth for your brand.</p>
+    <div class="svc-grid reveal-stagger">
       <div class="svc-card reveal" onclick="openModal('funnel')">
         <div class="svc-n">01</div>
         <div class="svc-icon">🎯</div>
@@ -537,16 +593,16 @@ section{transform:translateZ(0)}
 <section id="about">
   <div class="container">
     <div class="about-wrap">
-      <div class="about-img-wrap reveal">
+      <div class="about-img-wrap reveal-left">
         <img src="onome-about.png" alt="Onome Ahorituwere" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:20px;display:block;border:1px solid var(--border2)">
         <div class="about-badge">
           <div class="about-badge-num">7+</div>
           <div class="about-badge-lbl">Years of Mastery</div>
         </div>
       </div>
-      <div class="about-text reveal">
+      <div class="about-text reveal-right">
         <div class="sec-label">About Me</div>
-        <h2 class="sec-title" style="font-size:clamp(1.75rem,3vw,2.75rem)">Founder of SammieDigital & <em>IT Project Manager</em></h2>
+        <h2 class="sec-title reveal-zoom" style="font-size:clamp(1.75rem,3vw,2.75rem)">Founder of SammieDigital & <em>IT Project Manager</em></h2>
         <p>I'm Onome Ahorituwere, a Digital Strategist, IT Project Manager, and Founder of SammieDigital based in Lagos, Nigeria. With 7+ years of freelance experience and 150+ projects delivered across Fiverr and Upwork, I've built a reputation for delivering results that go beyond design.</p>
         <p>My background spans web development, conversion funnel strategy, AI-powered workflows, and Web 3.0 operations. I've led teams across three countries with AIESEC, managed a 50-member gaming community at Awujo in the Web 3.0 ecosystem, and represented the company at an international tournament in Dubai.</p>
         <div class="about-certs">
@@ -564,9 +620,9 @@ section{transform:translateZ(0)}
 <section id="process" style="padding-top:8rem">
   <div class="container">
     <div class="sec-label">How I Work</div>
-    <h2 class="sec-title">A Process Built<br>for <em>Results</em></h2>
-    <p class="sec-sub">Every project follows a proven 8-step framework ensuring clarity, quality, and on-time delivery.</p>
-    <div class="proc-grid">
+    <h2 class="sec-title reveal-zoom">A Process Built<br>for <em>Results</em></h2>
+    <p class="sec-sub reveal">Every project follows a proven 8-step framework ensuring clarity, quality, and on-time delivery.</p>
+    <div class="proc-grid reveal-stagger">
       <div class="proc-step reveal"><div class="proc-n">01</div><div class="proc-title">Discover</div><div class="proc-desc">Deep dive into your business goals, target audience, and existing assets to establish a clear foundation.</div></div>
       <div class="proc-step reveal"><div class="proc-n">02</div><div class="proc-title">Research</div><div class="proc-desc">Competitor analysis, market research, and conversion benchmarking to inform every strategic decision.</div></div>
       <div class="proc-step reveal"><div class="proc-n">03</div><div class="proc-title">Strategy</div><div class="proc-desc">Define the roadmap, scope, timeline, and measurable success criteria before any work begins.</div></div>
@@ -583,8 +639,8 @@ section{transform:translateZ(0)}
 <section id="tools">
   <div class="container">
     <div class="sec-label">Tools &amp; Expertise</div>
-    <h2 class="sec-title">The Stack Behind<br><em>the Results</em></h2>
-    <p class="sec-sub">A carefully selected toolkit of industry-leading platforms and AI tools used across every project.</p>
+    <h2 class="sec-title reveal-zoom">The Stack Behind<br><em>the Results</em></h2>
+    <p class="sec-sub reveal">A carefully selected toolkit of industry-leading platforms and AI tools used across every project.</p>
     <div class="tools-grid">
       <div class="tool-item reveal"><div class="tool-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#21759B" style="width:40px;height:40px"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/></svg></div><div class="tool-name">WordPress</div></div>
       <div class="tool-item reveal"><div class="tool-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#96BF48" style="width:40px;height:40px"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg></div><div class="tool-name">Shopify</div></div>
@@ -612,8 +668,8 @@ section{transform:translateZ(0)}
 <section id="work">
   <div class="container">
     <div class="sec-label">Selected Work</div>
-    <h2 class="sec-title">Projects That<br><em>Delivered Results</em></h2>
-    <p class="sec-sub">A snapshot of client projects spanning e-commerce, coaching, health, and professional services.</p>
+    <h2 class="sec-title reveal-zoom">Projects That<br><em>Delivered Results</em></h2>
+    <p class="sec-sub reveal">A snapshot of client projects spanning e-commerce, coaching, health, and professional services.</p>
     <div class="work-grid" id="workGrid"></div>
     <div style="text-align:center;margin-top:3rem"><a href="portfolio.html" class="btn-pri" style="display:inline-flex">View All Projects &rarr;</a></div>
   </div>
@@ -623,8 +679,8 @@ section{transform:translateZ(0)}
 <section id="testimonials">
   <div class="container">
     <div class="sec-label">Client Reviews</div>
-    <h2 class="sec-title">What <em>Clients</em> Say</h2>
-    <p class="sec-sub">Over 50 verified reviews from clients on Fiverr and Upwork. Here's a snapshot.</p>
+    <h2 class="sec-title reveal-zoom">What <em>Clients</em> Say</h2>
+    <p class="sec-sub reveal">Over 50 verified reviews from clients on Fiverr and Upwork. Here's a snapshot.</p>
     <div class="testi-grid" id="testiGrid"></div>
   </div>
 </section>
@@ -633,9 +689,9 @@ section{transform:translateZ(0)}
 <section id="results">
   <div class="container">
     <div class="sec-label">By the Numbers</div>
-    <h2 class="sec-title">The Results <em>Dashboard</em></h2>
-    <p class="sec-sub">Real numbers from real projects delivered over 7+ years of professional practice.</p>
-    <div class="results-grid">
+    <h2 class="sec-title reveal-zoom">The Results <em>Dashboard</em></h2>
+    <p class="sec-sub reveal">Real numbers from real projects delivered over 7+ years of professional practice.</p>
+    <div class="results-grid reveal-stagger">
       <div class="result-item reveal"><div class="result-icon">🎯</div><div class="result-num counter" data-target="150">0</div><div class="result-lbl">Projects Delivered</div></div>
       <div class="result-item reveal"><div class="result-icon">🚀</div><div class="result-num counter" data-target="100">0</div><div class="result-lbl">Landing Pages Built</div></div>
       <div class="result-item reveal"><div class="result-icon">📧</div><div class="result-num counter" data-target="80">0</div><div class="result-lbl">Email Campaigns</div></div>
@@ -650,7 +706,7 @@ section{transform:translateZ(0)}
 <section id="faq">
   <div class="container">
     <div class="sec-label">FAQ</div>
-    <h2 class="sec-title">Frequently Asked<br><em>Questions</em></h2>
+    <h2 class="sec-title reveal-zoom">Frequently Asked<br><em>Questions</em></h2>
     <div class="faq-list" id="faqList"></div>
   </div>
 </section>
@@ -660,8 +716,8 @@ section{transform:translateZ(0)}
   <div class="container">
     <div class="contact-wrap">
       <div class="sec-label">Work With Me</div>
-      <h2 class="sec-title">Let's Build Something<br>That <em>Converts</em></h2>
-      <p class="sec-sub">Tell me about your project and I'll get back to you within 24 hours.</p>
+      <h2 class="sec-title reveal-zoom">Let's Build Something<br>That <em>Converts</em></h2>
+      <p class="sec-sub reveal">Tell me about your project and I'll get back to you within 24 hours.</p>
       <div class="contact-form-box">
         <div class="form-prog" id="formProg"></div>
         <div id="formSteps"></div>
@@ -986,13 +1042,50 @@ function openModal(k){
 function closeModal(){ document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow = ''; }
 function closeModalOut(e){ if(e.target === document.getElementById('modalBg')) closeModal(); }
 
-// SCROLL REVEAL
+// SCROLL REVEAL — handles .reveal, .reveal-left, .reveal-right, .reveal-zoom, .reveal-stagger, .sec-label, .trust-item, .result-item, .proc-step
+var revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-zoom, .reveal-stagger, .sec-label, .trust-item, .result-item, .proc-step';
 var obs = new IntersectionObserver(function(es){
   es.forEach(function(e){
-    if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); }
+    if(e.isIntersecting){
+      // Stagger: add delay to each child based on its index
+      if(e.target.classList.contains('reveal-stagger')){
+        var kids = e.target.children;
+        for(var i=0;i<kids.length;i++){
+          kids[i].style.transitionDelay = (i * 0.09) + 's';
+        }
+      }
+      e.target.classList.add('on');
+      obs.unobserve(e.target);
+    }
   });
-}, {threshold: 0.08});
-document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+}, {threshold: 0.07});
+document.querySelectorAll(revealSelectors).forEach(function(el){ obs.observe(el); });
+
+// TYPEWRITER for hero eyebrow
+(function(){
+  var el = document.getElementById('heroTypewriter');
+  if(!el) return;
+  var text = 'Founder of SammieDigital \u00a0·\u00a0 IT Project Manager';
+  var i = 0;
+  el.style.borderRight = '2px solid var(--accent2)';
+  el.style.paddingRight = '2px';
+  function type(){
+    if(i <= text.length){
+      el.textContent = text.slice(0, i);
+      i++;
+      setTimeout(type, i < 10 ? 60 : 42);
+    } else {
+      // Blink then remove cursor
+      var blinks = 0;
+      var b = setInterval(function(){
+        el.style.borderColor = blinks % 2 === 0 ? 'transparent' : 'var(--accent2)';
+        if(++blinks > 5){ clearInterval(b); el.style.borderRight = 'none'; }
+      }, 400);
+    }
+  }
+  // Start after loader delay
+  setTimeout(type, 1400);
+})();
 
 // COUNTERS
 var cobs = new IntersectionObserver(function(es){
