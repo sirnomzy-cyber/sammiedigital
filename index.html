@@ -787,10 +787,21 @@ var modals={
 
 // RENDER PROJECTS
 var wg = document.getElementById('workGrid');
-var fallbackColors = ['#0F4C81','#1a1a2e','#0d3b2e','#2d1b4e','#4a1942','#1a2a1a'];
+var fallbackGradients = [
+  'linear-gradient(135deg,#0F4C81,#1a2a4a)',
+  'linear-gradient(135deg,#1a1a2e,#2d1b4e)',
+  'linear-gradient(135deg,#0d3b2e,#1a5c3a)',
+  'linear-gradient(135deg,#2d1b4e,#4a2060)',
+  'linear-gradient(135deg,#4a1942,#7a2060)',
+  'linear-gradient(135deg,#1a2a1a,#2d4a2d)'
+];
+
 projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
-  var screenshotUrl = 'https://image.thum.io/get/width/1280/crop/800/noanimate/'+p.url;
+
+  // Try two screenshot services in sequence; if both fail, show styled placeholder
+  var src1 = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + p.url;
+  var src2 = 'https://api.screenshotmachine.com?url=' + encodeURIComponent(p.url) + '&dimension=1280x800&format=jpg&cacheLimit=0';
 
   var card = document.createElement('div');
   card.className = 'work-card reveal';
@@ -799,12 +810,41 @@ projects.forEach(function(p, idx){
   imgWrap.className = 'work-img';
 
   var img = document.createElement('img');
-  img.src = screenshotUrl;
   img.alt = p.title;
   img.loading = 'lazy';
-  img.onerror = (function(color, wrap) {
-    return function() { this.style.display = 'none'; wrap.style.background = color; };
-  })(fallbackColors[idx % 6], imgWrap);
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;display:block';
+
+  var tried2 = false;
+  img.onerror = (function(gradient, wrap, url, title, s2) {
+    return function() {
+      if (!tried2) {
+        tried2 = true;
+        this.src = s2;
+      } else {
+        // Both failed — show styled placeholder
+        this.style.display = 'none';
+        wrap.style.background = gradient;
+        wrap.style.display = 'flex';
+        wrap.style.alignItems = 'center';
+        wrap.style.justifyContent = 'center';
+        wrap.style.flexDirection = 'column';
+        wrap.style.gap = '0.75rem';
+        wrap.style.padding = '2rem';
+        var lbl = document.createElement('div');
+        lbl.style.cssText = 'font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.85);text-align:center';
+        lbl.textContent = title;
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.style.cssText = 'font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);text-decoration:none;border:1px solid rgba(96,165,250,0.4);padding:0.4rem 1rem;border-radius:4px';
+        link.textContent = 'View Live Site →';
+        wrap.appendChild(lbl);
+        wrap.appendChild(link);
+      }
+    };
+  })(fallbackGradients[idx % 6], imgWrap, p.url, p.title, src2);
+
+  img.src = src1;
 
   var ol = document.createElement('a');
   ol.href = p.url;
@@ -823,7 +863,6 @@ projects.forEach(function(p, idx){
   card.appendChild(body);
   wg.appendChild(card);
 
-  // Trigger reveal directly
   setTimeout(function(){ card.classList.add('on'); }, 100 * idx);
 });
 
