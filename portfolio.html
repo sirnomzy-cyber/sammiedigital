@@ -111,19 +111,48 @@ var cardColors = [
 function renderProjects(projects) {
   var grid = document.getElementById('portGrid');
   var empty = document.getElementById('emptyState');
-  // Remove existing cards
   var existing = grid.querySelectorAll('.port-card');
   for (var i = 0; i < existing.length; i++) existing[i].remove();
-
   if (projects.length === 0) { empty.classList.add('show'); return; }
   empty.classList.remove('show');
 
+  var fallbackColors = ['#0F4C81','#1a1a2e','#0d3b2e','#2d1b4e','#4a1942','#1a2a1a'];
+
   projects.forEach(function(p, idx) {
-    var tags = p.tags.map(function(t){ return '<span class="port-tag">'+t+'</span>'; }).join('');
-    var colorIdx = allProjects.indexOf(p) >= 0 ? allProjects.indexOf(p) : idx % cardColors.length;
+    var screenshotUrl = 'https://api.screenshotone.com/take?url=' + encodeURIComponent(p.url) + '&viewport_width=1280&viewport_height=800&format=jpg&image_quality=80&block_ads=true&delay=2';
+    var colorIdx = allProjects.indexOf(p) >= 0 ? allProjects.indexOf(p) : idx % fallbackColors.length;
+
     var card = document.createElement('div');
     card.className = 'port-card';
-    card.innerHTML = '<div class="port-img" style="background:'+cardColors[colorIdx]+'"><iframe src="'+p.url+'" loading="lazy" scrolling="no" title="'+p.title+'"></iframe><a href="'+p.url+'" target="_blank" class="port-overlay">View Live Site &rarr;</a></div><div class="port-body"><div class="port-tags">'+tags+'</div><h3 class="port-title-card">'+p.title+'</h3><p class="port-desc">'+p.desc+'</p><div class="port-meta"><div><strong>Platform</strong><span>'+p.p+'</span></div><div><strong>Type</strong><span>'+p.t+'</span></div></div></div>';
+
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'port-img';
+
+    var img = document.createElement('img');
+    img.src = screenshotUrl;
+    img.alt = p.title;
+    img.loading = 'lazy';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top';
+    img.onerror = (function(color, wrap) {
+      return function() { this.style.display = 'none'; wrap.style.background = color; };
+    })(fallbackColors[colorIdx], imgWrap);
+
+    var overlay = document.createElement('a');
+    overlay.href = p.url;
+    overlay.target = '_blank';
+    overlay.className = 'port-overlay';
+    overlay.textContent = 'View Live Site →';
+
+    imgWrap.appendChild(img);
+    imgWrap.appendChild(overlay);
+
+    var tags = p.tags.map(function(t) { return '<span class="port-tag">' + t + '</span>'; }).join('');
+    var body = document.createElement('div');
+    body.className = 'port-body';
+    body.innerHTML = '<div class="port-tags">' + tags + '</div><h3 class="port-title-card">' + p.title + '</h3><p class="port-desc">' + p.desc + '</p><div class="port-meta"><div><strong>Platform</strong><span>' + p.p + '</span></div><div><strong>Type</strong><span>' + p.t + '</span></div></div>';
+
+    card.appendChild(imgWrap);
+    card.appendChild(body);
     grid.appendChild(card);
   });
 }

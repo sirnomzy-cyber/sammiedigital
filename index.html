@@ -103,7 +103,7 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 .hero-overlay{position:absolute;inset:0;z-index:1}
 [data-theme="dark"] .hero-overlay{background:linear-gradient(105deg,rgba(2,6,23,0.93) 45%,rgba(2,6,23,0.45) 100%),linear-gradient(to top,rgba(2,6,23,1) 0%,transparent 55%)}
 [data-theme="light"] .hero-overlay{background:linear-gradient(105deg,rgba(10,20,60,0.88) 45%,rgba(10,20,60,0.4) 100%),linear-gradient(to top,rgba(10,20,60,0.9) 0%,transparent 55%)}
-.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:0 3rem 4.5rem;width:100%}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:6rem 3rem 5rem;width:100%}
 .hero-content{width:100%;max-width:1200px}
 .hero-bottom-row{display:flex;align-items:flex-end;gap:3rem;margin-top:1.5rem}
 .hero-bottom-left{flex:1}
@@ -229,7 +229,9 @@ section{padding:6rem 3rem}
 .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin-top:3.5rem}
 .work-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:all 0.35s;cursor:pointer}
 .work-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
-.work-img{aspect-ratio:16/9;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.work-img{aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden}
+.work-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease}
+.work-card:hover .work-img img{transform:scale(1.03)}
 .work-img-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s;text-decoration:none}
 .work-card:hover .work-img-overlay{opacity:1}
 .work-iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none;border-radius:0}
@@ -245,8 +247,8 @@ section{padding:6rem 3rem}
 .work-meta-item span{font-size:0.72rem;color:var(--muted)}
 
 /* TESTIMONIALS */
-#testimonials{background:var(--bg2);position:relative}
-#testimonials::before{content:"";position:fixed;inset:0;background:url("photo-testimonials.png") center/cover no-repeat fixed;opacity:0.07;z-index:0;pointer-events:none}
+#testimonials{background-color:var(--bg2);background-image:url("photo-testimonials.png");background-size:cover;background-position:center;background-attachment:fixed;position:relative}
+#testimonials::before{content:"";position:absolute;inset:0;background:rgba(9,15,30,0.88);z-index:0}
 #testimonials .container{position:relative;z-index:1}
 .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3.5rem}
 .testi-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:2.25rem;transition:all 0.3s}
@@ -284,9 +286,9 @@ section{padding:6rem 3rem}
 .faq-item.open .faq-a{max-height:300px}
 
 /* CONTACT */
-#contact{background:var(--bg);position:relative;overflow:hidden}
-#contact::before{content:"";position:fixed;inset:0;background:url("photo-contact.png") center/cover no-repeat fixed;opacity:0.08;z-index:0;pointer-events:none}
-#contact .container{position:relative;z-index:1}
+#contact{background-color:var(--bg);background-image:url("photo-contact.png");background-size:cover;background-position:center;background-attachment:fixed;position:relative}
+#contact::before{content:"";position:absolute;inset:0;background:rgba(2,6,23,0.9);z-index:0}
+#contact .container{position:relative;z-index:1;position:relative}
 .contact-wrap{max-width:660px;margin:0 auto;position:relative}
 .contact-form-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:3rem;margin-top:3rem}
 .form-prog{display:flex;gap:0.5rem;margin-bottom:2.5rem}
@@ -382,6 +384,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
   .foot-top{grid-template-columns:1fr}
   .stats-bar-inner{grid-template-columns:1fr 1fr}
 }
+
+/* SMOOTH SCROLL + PERFORMANCE */
+html{scroll-behavior:smooth}
+*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.reveal{will-change:transform,opacity}
+.reveal.on{will-change:auto}
+section{transform:translateZ(0)}
+.hero-bg{will-change:transform}
 </style>
 </head>
 <body>
@@ -780,18 +790,10 @@ var modals={
 
 // RENDER PROJECTS
 var wg = document.getElementById('workGrid');
-var cardColors = [
-  'linear-gradient(135deg,#0F4C81,#1a6fa8)',
-  'linear-gradient(135deg,#1a1a2e,#16213e)',
-  'linear-gradient(135deg,#0d3b2e,#1a5c45)',
-  'linear-gradient(135deg,#2d1b4e,#4a2d7a)',
-  'linear-gradient(135deg,#4a1942,#7b2d6e)',
-  'linear-gradient(135deg,#1a2a1a,#2d4a1e)'
-];
 projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
-  var img = '<div class="work-img" style="background:'+cardColors[idx]+';"><iframe src="'+p.url+'" class="work-iframe" loading="lazy" scrolling="no" title="'+p.title+'"></iframe><a href="'+p.url+'" target="_blank" class="work-img-overlay">View Live Site &rarr;</a></div>';
-  wg.innerHTML += '<div class="work-card reveal">'+img+'<div class="work-body"><div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site &rarr;</a></div></div>';
+  var screenshotUrl = 'https://api.screenshotone.com/take?url='+encodeURIComponent(p.url)+'&viewport_width=1280&viewport_height=800&format=jpg&image_quality=80&block_ads=true&delay=2';
+  var fallbackColors = ['#0F4C81','#1a1a2e','#0d3b2e','#2d1b4e','#4a1942','#1a2a1a'];
 });
 
 // RENDER TESTIMONIALS
