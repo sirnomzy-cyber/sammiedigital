@@ -296,6 +296,8 @@ section{padding:6rem 3rem}
 .work-img{aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden}
 .work-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease}
 .work-card:hover .work-img img{transform:scale(1.03)}
+.work-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease}
+.work-card:hover .work-img img{transform:scale(1.03)}
 .work-img-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity 0.3s;text-decoration:none}
 .work-card:hover .work-img-overlay{opacity:1}
 .work-img{position:relative;overflow:hidden}
@@ -860,63 +862,57 @@ var fallbackGradients = [
   'linear-gradient(135deg,#1a2a1a,#2d4a2d)'
 ];
 
+// useIframe: true for sites we own (Vercel) — they allow iframes
+// useIframe: false for external sites like Shopify
 projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
-
-  // Try two screenshot services in sequence; if both fail, show styled placeholder
-  var src1 = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + p.url;
-  var src2 = 'https://api.screenshotmachine.com?url=' + encodeURIComponent(p.url) + '&dimension=1280x800&format=jpg&cacheLimit=0';
 
   var card = document.createElement('div');
   card.className = 'work-card reveal';
 
   var imgWrap = document.createElement('div');
   imgWrap.className = 'work-img';
+  imgWrap.style.position = 'relative';
+  imgWrap.style.overflow = 'hidden';
+  imgWrap.style.aspectRatio = '16/9';
+  imgWrap.style.background = fallbackGradients[idx % 6];
 
-  var img = document.createElement('img');
-  img.alt = p.title;
-  img.loading = 'lazy';
-  img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;display:block';
+  var isVercel = p.url.indexOf('vercel.app') !== -1;
 
-  var tried2 = false;
-  img.onerror = (function(gradient, wrap, url, title, s2) {
-    return function() {
-      if (!tried2) {
-        tried2 = true;
-        this.src = s2;
-      } else {
-        // Both failed — show styled placeholder
+  if (isVercel) {
+    // Use iframe for Vercel sites — reliable, no external dependency
+    var iframe = document.createElement('iframe');
+    iframe.src = p.url;
+    iframe.loading = 'lazy';
+    iframe.scrolling = 'no';
+    iframe.setAttribute('title', p.title);
+    iframe.style.cssText = 'position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none';
+    imgWrap.appendChild(iframe);
+  } else {
+    // Use screenshot service for external sites (Shopify etc)
+    var img = document.createElement('img');
+    img.alt = p.title;
+    img.loading = 'lazy';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;display:block;position:absolute;top:0;left:0';
+    img.src = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + p.url;
+    img.onerror = (function(wrap, title, url) {
+      return function() {
         this.style.display = 'none';
-        wrap.style.background = gradient;
-        wrap.style.display = 'flex';
-        wrap.style.alignItems = 'center';
-        wrap.style.justifyContent = 'center';
-        wrap.style.flexDirection = 'column';
-        wrap.style.gap = '0.75rem';
-        wrap.style.padding = '2rem';
         var lbl = document.createElement('div');
-        lbl.style.cssText = 'font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.85);text-align:center';
+        lbl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.85);text-align:center;width:80%';
         lbl.textContent = title;
-        var link = document.createElement('a');
-        link.href = url;
-        link.target = '_blank';
-        link.style.cssText = 'font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);text-decoration:none;border:1px solid rgba(96,165,250,0.4);padding:0.4rem 1rem;border-radius:4px';
-        link.textContent = 'View Live Site →';
         wrap.appendChild(lbl);
-        wrap.appendChild(link);
-      }
-    };
-  })(fallbackGradients[idx % 6], imgWrap, p.url, p.title, src2);
+      };
+    })(imgWrap, p.title, p.url);
+    imgWrap.appendChild(img);
+  }
 
-  img.src = src1;
-
+  // Overlay link
   var ol = document.createElement('a');
   ol.href = p.url;
   ol.target = '_blank';
   ol.className = 'work-img-overlay';
   ol.textContent = 'View Live Site →';
-
-  imgWrap.appendChild(img);
   imgWrap.appendChild(ol);
 
   var body = document.createElement('div');
@@ -927,9 +923,8 @@ projects.forEach(function(p, idx){
   card.appendChild(body);
   wg.appendChild(card);
 
-  setTimeout(function(){ card.classList.add('on'); }, 100 * idx);
+  setTimeout(function(){ card.classList.add('on'); }, 150 * idx);
 });
-
 // RENDER TESTIMONIALS
 var tg = document.getElementById('testiGrid');
 testimonials.forEach(function(t){
