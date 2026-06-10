@@ -106,7 +106,6 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 .hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:6rem 3rem 7rem;width:100%}
 .hero-content{width:100%;max-width:1200px}
 .hero-bottom-row{display:flex;align-items:flex-end;gap:3rem;margin-top:1.5rem}
-.hero-bottom-left{flex:1}
 .hero-stats-side{display:flex;flex-direction:row;gap:2rem;flex-shrink:0;padding-left:2.5rem;border-left:1px solid rgba(255,255,255,0.15);padding-bottom:0.25rem}
 .hero-stat-side-item{text-align:center}
 .hero-stat-side-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:#fff;line-height:1}
@@ -455,6 +454,35 @@ html{scroll-behavior:smooth}
 .reveal.on{will-change:auto}
 section{transform:translateZ(0)}
 .hero-bg{will-change:transform}
+
+.hero-badges{display:flex;flex-wrap:wrap;gap:0.6rem 1.5rem;margin-bottom:1.75rem;opacity:0;animation:up 0.9s 0.7s ease both}
+.hero-badge-item{font-size:0.8rem;color:rgba(255,255,255,0.85);font-weight:500;display:flex;align-items:center;gap:0.4rem}
+.hero-badge-item::before{content:attr(data-check);color:var(--accent2)}
+
+.work-outcome{margin:0.75rem 0;padding:0.75rem 1rem;background:rgba(59,130,246,0.06);border-left:2px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.8rem;color:var(--muted);line-height:1.6;font-weight:300}
+.work-outcome-icon{margin-right:0.4rem}
+
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(2,6,23,0.96);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,0.2);padding:1rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem}
+.sticky-cta-text{font-size:0.85rem;color:rgba(255,255,255,0.8);font-weight:400}
+.sticky-cta-text strong{color:#fff;display:block;font-family:var(--font-display);font-size:1rem}
+.sticky-cta-btn{background:var(--accent);color:#fff;padding:0.7rem 1.4rem;border-radius:4px;font-weight:600;font-size:0.82rem;text-decoration:none;white-space:nowrap;transition:all 0.2s;flex-shrink:0}
+.sticky-cta-btn:hover{background:var(--accent2)}
+.sticky-cta-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:0.25rem;flex-shrink:0}
+@media(max-width:768px){.sticky-cta{display:flex}}
+
+.hero-trust-badges{display:flex;flex-direction:column;gap:0.75rem;padding-left:2.5rem;border-left:1px solid rgba(255,255,255,0.15)}
+.hero-trust-item{font-size:0.82rem;color:rgba(255,255,255,0.8);font-weight:400;padding-left:0.875rem;border-left:2px solid var(--accent);line-height:1.4;white-space:nowrap;transition:border-color 0.3s,color 0.3s}
+.hero-trust-item:hover{border-left-color:var(--accent2);color:#fff}
+@media(max-width:768px){
+  .hero-action-row{flex-direction:column;align-items:flex-start;gap:1.5rem}
+  .hero-trust-badges{flex-direction:row;flex-wrap:wrap;gap:0.6rem 1.5rem;padding-left:0;border-left:none;padding-top:0.75rem;border-top:1px solid rgba(255,255,255,0.1)}
+  .hero-trust-item{white-space:normal}
+}
+
+
+.hero-action-row{display:flex;align-items:center;gap:3rem;flex-wrap:wrap}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;flex-shrink:0}
+
 </style>
 </head>
 <body>
@@ -483,7 +511,7 @@ section{transform:translateZ(0)}
   </ul>
   <div class="nav-right">
     <div class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">☀️</div>
-    <a href="#contact" class="nav-cta">Let's Work Together</a>
+    <a href="#contact" class="nav-cta">Book a Free Call</a>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -509,10 +537,6 @@ section{transform:translateZ(0)}
   </div>
   <div class="hero-body">
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text" id="heroTypewriter"></span>
-      </div>
       <h1 class="hero-title">
         Turning Clicks<br>
         Into <em>Customers</em><br>
@@ -521,16 +545,21 @@ section{transform:translateZ(0)}
       <div class="hero-bottom-row">
         <div class="hero-bottom-left">
           <p class="hero-sub">I help coaches, consultants, service providers, and growing businesses attract more leads, convert more customers, and increase revenue through conversion-focused funnels, AI-powered workflows, and digital experiences that actually work.</p>
+          <div class="hero-eyebrow" style="margin-bottom:1.5rem;margin-top:0.5rem;opacity:1;animation:none">
+            <span class="hero-eyebrow-line"></span>
+            <span class="hero-eyebrow-text">Founder of SammieDigital &nbsp;·&nbsp; IT Project Manager</span>
+          </div>
           <div class="hero-btns">
             <a href="#work" class="btn-pri">View My Work →</a>
-            <a href="#contact" class="btn-sec">Book a Discovery Call</a>
+            <a href="#contact" class="btn-sec">Book a Free Strategy Call</a>
           </div>
         </div>
-        <div class="hero-stats-side">
-          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="150" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Projects Delivered</div></div>
-          <div class="hero-stat-side-item"><div class="hero-stat-side-num">4.9<em>★</em></div><div class="hero-stat-side-lbl">Client Rating</div></div>
-          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="7" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Years Experience</div></div>
-          <div class="hero-stat-side-item"><div class="hero-stat-side-num h-counter" data-target="50" data-suffix="+">0+</div><div class="hero-stat-side-lbl">Satisfied Clients</div></div>
+        <div class="hero-trust-badges">
+          <div class="hero-trust-item">Level 2 Seller on Fiverr</div>
+          <div class="hero-trust-item">Top Rated on Upwork</div>
+          <div class="hero-trust-item">150+ Projects Delivered</div>
+          <div class="hero-trust-item">4.9&#9733; Client Rating</div>
+        </div>
         </div>
       </div>
     </div>
@@ -815,12 +844,12 @@ function runHeroCounters(){
 
 // DATA
 var projects=[
-  {url:'https://tasteescookies.com/',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build covering product uploads, domain connection, custom design, and post-launch support for a Nigerian cookie brand.",p:'Shopify',t:'E-commerce'},
-  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow. Deployed on Vercel via GitHub.',p:'Vercel / GitHub',t:'Blog'},
-  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout for a medical practice.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and integrated lead capture for a luxury resort.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity built for a premium bakery business.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Business Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and a bold editorial design with strong visual impact.',p:'HTML / CSS / JS',t:'Business Website'}
+  {url:'https://tasteescookies.com/',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build covering product uploads, domain connection, and custom design for a Nigerian cookie brand.",outcome:"Built to drive online sales and reduce cart abandonment through a clean, trust-focused shopping experience.",p:'Shopify',t:'E-commerce'},
+  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow.',outcome:"Designed to grow organic readership and maximise affiliate revenue through an engaging, content-first layout.",p:'Vercel / GitHub',t:'Blog'},
+  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout.',outcome:"Built to increase appointment bookings by reducing friction and building immediate trust with new patients.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and lead capture.',outcome:"Engineered to capture qualified buyer leads and drive enquiries through an immersive, premium presentation.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity.',outcome:"Designed to convert website visitors into custom order enquiries through mouth-watering visuals and a clear ordering flow.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and editorial design.',outcome:"Built to position the brand as a market leader and generate qualified project enquiries from high-value clients.",p:'HTML / CSS / JS',t:'Website'}
 ];
 
 var testimonials=[
@@ -917,7 +946,8 @@ projects.forEach(function(p, idx){
 
   var body = document.createElement('div');
   body.className = 'work-body';
-  body.innerHTML = '<div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p><div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site →</a>';
+  var outcomeHtml = p.outcome ? '<div class="work-outcome"><span>&#127919;</span> '+p.outcome+'</div>' : '';
+  body.innerHTML = '<div class="work-tags">'+tags+'</div><h3 class="work-title">'+p.title+'</h3><p class="work-desc">'+p.desc+'</p>'+outcomeHtml+'<div class="work-meta"><div class="work-meta-item"><strong>Platform</strong><span>'+p.p+'</span></div><div class="work-meta-item"><strong>Type</strong><span>'+p.t+'</span></div></div><a href="'+p.url+'" target="_blank" class="svc-link" style="text-decoration:none">View Live Site →</a>';
 
   card.appendChild(imgWrap);
   card.appendChild(body);
@@ -1139,5 +1169,15 @@ window.addEventListener('load', function(){
   }, 2100);
 });
 </script>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-text">
+    <strong>Ready to grow your business?</strong>
+    Let's build something that converts.
+  </div>
+  <a href="#contact" class="sticky-cta-btn" onclick="document.getElementById('stickyCta').style.display='none'">Book a Free Call</a>
+  <button class="sticky-cta-close" onclick="document.getElementById('stickyCta').style.display='none'" aria-label="Close">&#10005;</button>
+</div>
 </body>
 </html>
