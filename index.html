@@ -238,8 +238,8 @@ section{padding:6rem 3rem}
 .svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.04),transparent);opacity:0;transition:opacity 0.3s}
 .svc-card:hover{background:var(--bg3)}
 .svc-card:hover::before{opacity:1}
-.svc-n{font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:var(--border2);line-height:1;margin-bottom:1.25rem;transition:color 0.3s}
-.svc-card:hover .svc-n{color:rgba(59,130,246,0.15)}
+.svc-n{font-family:var(--font-display);font-size:6rem;font-weight:700;color:rgba(59,130,246,0.08);line-height:1;position:absolute;top:1.25rem;right:1.5rem;transition:color 0.3s;letter-spacing:-0.04em}
+.svc-card:hover .svc-n{color:rgba(59,130,246,0.18)}
 .svc-icon{font-size:1.5rem;margin-bottom:0.875rem}
 .svc-title{font-family:var(--font-display);font-size:1.35rem;font-weight:600;margin-bottom:0.75rem;color:var(--text);line-height:1.25}
 .svc-desc{font-size:0.85rem;color:var(--muted);line-height:1.8;font-weight:300}
@@ -332,7 +332,7 @@ section{padding:6rem 3rem}
 .result-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 .result-item:hover{background:var(--bg3)}
 .result-icon{font-size:1.75rem;margin-bottom:1rem}
-.result-num{font-family:var(--font-display);font-size:3rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.5rem}
+.result-num{font-family:var(--font-display);font-size:3.25rem;font-weight:700;color:#fff;line-height:1;margin-bottom:0.5rem;letter-spacing:-0.02em}
 .result-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
 
 /* FAQ */
@@ -390,6 +390,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
 .foot-socials{display:flex;gap:0.75rem}
 .foot-soc{width:36px;height:36px;border-radius:4px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.85rem;text-decoration:none;color:var(--muted);transition:all 0.2s}
 .foot-soc:hover{border-color:var(--accent);color:var(--accent)}
+.foot-soc-wa:hover{border-color:#25D366;color:#25D366}
+.foot-soc-ig:hover{border-color:#E1306C;color:#E1306C}
+.foot-soc-uw:hover{border-color:#6FDA44;color:#6FDA44}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -471,7 +474,7 @@ section{transform:translateZ(0)}
 @media(max-width:768px){.sticky-cta{display:flex}}
 
 /* HERO BTNS + STATS — same row, buttons left, stats right */
-.hero-btns-stats-row{display:flex;align-items:center;justify-content:flex-start;gap:4rem;flex-wrap:nowrap;opacity:0;animation:up 0.9s 0.9s ease both;width:100%}
+.hero-btns-stats-row{display:flex;align-items:center;justify-content:flex-start;gap:3rem;flex-wrap:nowrap;opacity:0;animation:up 0.9s 0.9s ease both;width:100%}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;flex-shrink:0}
 .hero-stats-bar{display:flex;align-items:center;gap:0;margin-left:auto;flex-shrink:0}
 .hero-stat-item{text-align:center;padding:0 1.4rem}
@@ -481,10 +484,13 @@ section{transform:translateZ(0)}
 .hero-stat-lbl{font-size:0.58rem;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.3rem;white-space:nowrap}
 .hero-stat-divider{width:1px;height:28px;background:rgba(255,255,255,0.15);flex-shrink:0}
 @media(max-width:900px){
-  .hero-btns-stats-row{flex-wrap:wrap;gap:1.75rem}
-  .hero-stats-bar{margin-left:0;flex-wrap:wrap;gap:0}
-  .hero-stat-item{padding:0 1rem}
+  .hero-btns-stats-row{flex-wrap:wrap;gap:1.5rem}
+  .hero-stats-bar{margin-left:0;flex-wrap:nowrap}
+  .hero-stat-item{padding:0 0.8rem}
   .hero-stat-item:first-child{padding-left:0}
+  .hero-stat-num{font-size:1.05rem}
+  .hero-stat-lbl{font-size:0.52rem}
+  .hero-stat-divider{height:22px}
 }
 
 </style>
@@ -753,8 +759,8 @@ section{transform:translateZ(0)}
     <p class="sec-sub reveal">Real numbers from real projects delivered over 7+ years of professional practice.</p>
     <div class="results-grid reveal-stagger">
       <div class="result-item reveal"><div class="result-icon">🎯</div><div class="result-num counter" data-target="150">0</div><div class="result-lbl">Projects Delivered</div></div>
-      <div class="result-item reveal"><div class="result-icon">🚀</div><div class="result-num counter" data-target="100">0</div><div class="result-lbl">Landing Pages Built</div></div>
-      <div class="result-item reveal"><div class="result-icon">📧</div><div class="result-num counter" data-target="80">0</div><div class="result-lbl">Email Campaigns</div></div>
+      <div class="result-item reveal"><div class="result-icon">🚀</div><div class="result-num counter" data-target="100">0</div><div class="result-lbl">Websites &amp; Landing Pages</div></div>
+      <div class="result-item reveal"><div class="result-icon">📧</div><div class="result-num counter" data-target="50">0</div><div class="result-lbl">Email Campaigns</div></div>
       <div class="result-item reveal"><div class="result-icon">👥</div><div class="result-num counter" data-target="50">0</div><div class="result-lbl">Satisfied Clients</div></div>
       <div class="result-item reveal"><div class="result-icon">⭐</div><div class="result-num">4.9</div><div class="result-lbl">Average Star Rating</div></div>
 
@@ -827,7 +833,7 @@ section{transform:translateZ(0)}
           <li><a href="mailto:onomesamuel@gmail.com">onomesamuel@gmail.com</a></li>
           <li><a href="https://linkedin.com/in/onomeahorituwere" target="_blank">LinkedIn</a></li>
           <li><a href="https://www.fiverr.com" target="_blank">Fiverr</a></li>
-          <li><a href="https://www.upwork.com" target="_blank">Upwork</a></li>
+          <li><a href="https://www.upwork.com/freelancers/~0174240072895f17d8" target="_blank">Upwork</a></li>
           <li><a href="tel:+2348106014201">+234 810 601 4201</a></li>
         </ul>
       </div>
@@ -835,8 +841,17 @@ section{transform:translateZ(0)}
     <div class="foot-bottom">
       <p class="foot-copy">© 2026 SammieDigital · Onome Ahorituwere. All rights reserved.</p>
       <div class="foot-socials">
-        <a href="https://linkedin.com/in/onomeahorituwere" target="_blank" class="foot-soc">in</a>
-        <a href="mailto:onomesamuel@gmail.com" class="foot-soc">✉</a>
+        <a href="https://linkedin.com/in/onomeahorituwere" target="_blank" class="foot-soc" title="LinkedIn">in</a>
+        <a href="mailto:onomesamuel@gmail.com" class="foot-soc" title="Email">✉</a>
+        <a href="https://wa.me/2348106014201" target="_blank" class="foot-soc foot-soc-wa" title="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/onome_samuel/" target="_blank" class="foot-soc foot-soc-ig" title="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.upwork.com/freelancers/~0174240072895f17d8" target="_blank" class="foot-soc foot-soc-uw" title="Upwork">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H8.056v7.112c-.002 1.406-1.141 2.546-2.547 2.546-1.405 0-2.546-1.14-2.546-2.546V3.492H.945v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.741 1.109 3.077 0 5.658-2.541 5.658-5.658 0-3.076-2.541-5.61-5.658-5.61z"/></svg>
+        </a>
       </div>
     </div>
   </div>
