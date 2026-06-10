@@ -471,9 +471,9 @@ section{transform:translateZ(0)}
 @media(max-width:768px){.sticky-cta{display:flex}}
 
 /* HERO BTNS + STATS — same row, buttons left, stats right */
-.hero-btns-stats-row{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;opacity:0;animation:up 0.9s 0.9s ease both;width:100%;max-width:780px}
+.hero-btns-stats-row{display:flex;align-items:center;justify-content:flex-start;gap:4rem;flex-wrap:nowrap;opacity:0;animation:up 0.9s 0.9s ease both;width:100%}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;flex-shrink:0}
-.hero-stats-bar{display:flex;align-items:center;gap:0;margin-left:auto}
+.hero-stats-bar{display:flex;align-items:center;gap:0;margin-left:auto;flex-shrink:0}
 .hero-stat-item{text-align:center;padding:0 1.4rem}
 .hero-stat-item:first-child{padding-left:0}
 .hero-stat-num{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:#fff;line-height:1;letter-spacing:-0.01em}
@@ -481,8 +481,10 @@ section{transform:translateZ(0)}
 .hero-stat-lbl{font-size:0.58rem;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.3rem;white-space:nowrap}
 .hero-stat-divider{width:1px;height:28px;background:rgba(255,255,255,0.15);flex-shrink:0}
 @media(max-width:900px){
-  .hero-btns-stats-row{flex-direction:column;align-items:flex-start;gap:1.5rem}
-  .hero-stats-bar{margin-left:0}
+  .hero-btns-stats-row{flex-wrap:wrap;gap:1.75rem}
+  .hero-stats-bar{margin-left:0;flex-wrap:wrap;gap:0}
+  .hero-stat-item{padding:0 1rem}
+  .hero-stat-item:first-child{padding-left:0}
 }
 
 </style>
