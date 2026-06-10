@@ -57,8 +57,8 @@
   --font-body:'DM Sans',sans-serif;
 }
 
-html{scroll-behavior:smooth;cursor:none}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;line-height:1.6;transition:background 0.4s,color 0.4s}
+html{scroll-behavior:smooth;cursor:none;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;max-width:100vw;line-height:1.6;transition:background 0.4s,color 0.4s}
 
 /* CURSOR */
 .cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width 0.3s,height 0.3s}
@@ -103,8 +103,8 @@ nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(24px);-webkit-b
 .hero-overlay{position:absolute;inset:0;z-index:1}
 [data-theme="dark"] .hero-overlay{background:linear-gradient(105deg,rgba(2,6,23,0.93) 45%,rgba(2,6,23,0.45) 100%),linear-gradient(to top,rgba(2,6,23,1) 0%,transparent 55%)}
 [data-theme="light"] .hero-overlay{background:linear-gradient(105deg,rgba(10,20,60,0.88) 45%,rgba(10,20,60,0.4) 100%),linear-gradient(to top,rgba(10,20,60,0.9) 0%,transparent 55%)}
-.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:6rem 3rem 7rem;width:100%}
-.hero-content{width:100%;max-width:1200px}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;padding:6rem 3rem 7rem;width:100%;box-sizing:border-box}
+.hero-content{width:100%;max-width:1200px;overflow-x:hidden}
 .hero-bottom-row{display:flex;align-items:flex-end;gap:3rem;margin-top:1.5rem}
 .hero-stats-side{display:flex;flex-direction:row;gap:2rem;flex-shrink:0;padding-left:2.5rem;border-left:1px solid rgba(255,255,255,0.15);padding-bottom:0.25rem}
 .hero-stat-side-item{text-align:center}
@@ -448,7 +448,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:4rem 3r
 @media(max-width:480px){
   .foot-top{grid-template-columns:1fr}
   .stats-bar-inner{grid-template-columns:1fr 1fr}
-  .btn-pri,.btn-sec{font-size:0.75rem;padding:0.75rem 1.25rem}
+  .btn-pri,.btn-sec{font-size:0.75rem;padding:0.75rem 1.25rem;width:100%;text-align:center;box-sizing:border-box}
+  .hero-btns{flex-direction:column;width:100%}
+  .hero-body{padding:4rem 1.5rem 5rem}
+  .hero-btns-stats-row{gap:1rem}
 }
 
 /* SMOOTH SCROLL + PERFORMANCE */
