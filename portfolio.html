@@ -58,6 +58,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 /* RESPONSIVE */
 @media(max-width:768px){nav{padding:1rem 1.5rem}.port-hero{padding:7rem 1.5rem 3rem}.filters{padding:2rem 1.5rem}.port-grid{padding:0 1.5rem 4rem;grid-template-columns:1fr}}
+
+.port-outcome{margin:0.6rem 0;padding:0.6rem 0.875rem;background:rgba(59,130,246,0.06);border-left:2px solid var(--accent);border-radius:0 8px 8px 0;font-size:0.75rem;color:var(--muted);line-height:1.6;font-weight:300}
+
 </style>
 </head>
 <body>
@@ -72,7 +75,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 <div class="port-hero">
   <div class="port-label">Selected Works</div>
-  <h1 class="port-title">20+ Projects.<br><em>Every One Delivered.</em></h1>
+  <h1 class="port-title">26+ Projects.<br><em>Every One Delivered.</em></h1>
   <p class="port-sub">A curated collection of websites, funnels, landing pages, and digital experiences delivered for clients across Nigeria, the US, the UK, and beyond.</p>
 </div>
 
@@ -85,7 +88,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
   <button class="filter-btn" data-filter="Food">Food & Dining</button>
   <button class="filter-btn" data-filter="Events">Events</button>
   <button class="filter-btn" data-filter="SaaS">SaaS</button>
+  <button class="filter-btn" data-filter="Beauty">Beauty</button>
+  <button class="filter-btn" data-filter="Photography">Photography</button>
   <button class="filter-btn" data-filter="Legal">Legal</button>
+  <button class="filter-btn" data-filter="Education">Education</button>
   <button class="filter-btn" data-filter="Blog">Blog</button>
 </div>
 
@@ -95,26 +101,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 <script>
 var allProjects = [
-  {url:'https://tasteescookies.com/',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build covering product uploads, domain connection, custom design, and post-launch support for a Nigerian cookie brand.",p:'Shopify',t:'E-commerce'},
-  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow. Deployed on Vercel via GitHub.',p:'Vercel / GitHub',t:'Blog'},
-  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout for a medical practice.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and integrated lead capture for a luxury resort.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity built for a premium bakery business.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and a bold editorial design with strong visual impact.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://velvora-luxury-fashion.vercel.app/',tags:['E-commerce','Fashion'],title:'Velvora Luxury Fashion',desc:'High-end luxury fashion e-commerce website with elegant product displays, editorial-style layout, and a premium shopping experience.',p:'Shopify',t:'E-commerce'},
-  {url:'https://david-kingsley.vercel.app/',tags:['Personal Brand','Landing Page'],title:'David Kingsley',desc:'Sleek personal brand landing page designed to position and promote an individual professional with a strong visual identity and clear CTA.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://ijebu-spice-lounge.vercel.app/',tags:['Food & Dining','Website'],title:'Ijebu Spice Lounge',desc:'Vibrant restaurant website for a Nigerian dining experience featuring menu showcase, ambiance photography, and reservation integration.',p:'WordPress',t:'Website'},
-  {url:'https://vela-restuarant.vercel.app/',tags:['Food & Dining','Website'],title:'Vela Restaurant',desc:'Sophisticated restaurant website with online menu, about story, gallery, and booking functionality built for an upscale dining brand.',p:'WordPress',t:'Website'},
-  {url:'https://westmidlands-research-report.vercel.app/',tags:['Education','Landing Page'],title:'West Midlands School Research',desc:'Clean academic-style landing page presenting a school research report with structured data sections and professional presentation layout.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://harrison-and-cole-attorneys.vercel.app/',tags:['Legal','Website'],title:'Harrison & Cole Attorneys',desc:'Professional law firm website conveying trust and authority with practice areas, attorney profiles, and consultation request functionality.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://future-x-global-summit.vercel.app/',tags:['Events','Funnel'],title:'Future X Global Summit',desc:'High-converting event registration funnel for a global summit, featuring speaker lineup, schedule, countdown timer, and ticket purchase flow.',p:'GoHighLevel',t:'Funnel'},
-  {url:'https://iron-haven-fitness-club.vercel.app/',tags:['Fitness','Landing Page'],title:'Iron Haven Fitness Club',desc:'Energetic fitness club landing page with membership plans, class schedules, trainer profiles, and a strong conversion-focused layout.',p:'GoHighLevel',t:'Landing Page'},
-  {url:'https://azure-pearl-resort.vercel.app/',tags:['Hospitality','Website'],title:'Azure Pearl Resort',desc:'Luxury resort website with immersive full-screen visuals, amenities showcase, room gallery, and integrated booking experience.',p:'WordPress',t:'Website'},
-  {url:'https://flow-sync-ai-ochre.vercel.app/',tags:['SaaS','Landing Page'],title:'FlowSync AI',desc:'Modern SaaS landing page for an AI productivity tool featuring feature highlights, pricing tiers, testimonials, and a free trial CTA.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://titan-build-construction-group-h3sg.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group v2',desc:'Updated version of the Titan Build construction company website with enhanced project portfolio and refreshed design.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://future-x-kohl.vercel.app/',tags:['Events','Website'],title:'Future X Events',desc:'Dynamic events website showcasing upcoming and past events, speaker features, and an engaging registration flow for a recurring events brand.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://crumble-cookie-brand.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Crumble Cookie',desc:'Playful and conversion-optimised Shopify e-commerce store for a cookie brand, featuring product collections, custom packaging options, and seamless checkout.',p:'Shopify',t:'E-commerce'},
-  {url:'https://maison-crumb-b2xk.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Maison Crumb',desc:'Premium artisan bakery e-commerce website with elegant product presentation, custom order capability, and a refined brand aesthetic.',p:'Shopify',t:'E-commerce'}
+  {url:'https://tasteescookies.com/',tags:['E-commerce','Shopify'],title:"Tastee's Cookies",desc:"Full Shopify e-commerce build covering product uploads, domain connection, and custom design for a Nigerian cookie brand.",outcome:"Built to drive online sales and reduce cart abandonment through a clean, trust-focused shopping experience.",p:'Shopify',t:'E-commerce'},
+  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow.',outcome:"Designed to grow organic readership and maximise affiliate revenue through an engaging, content-first layout.",p:'Vercel / GitHub',t:'Blog'},
+  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout.',outcome:"Built to increase appointment bookings by reducing friction and building immediate trust with new patients.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and lead capture.',outcome:"Engineered to capture qualified buyer leads and drive enquiries through an immersive, premium presentation.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity.',outcome:"Designed to convert website visitors into custom order enquiries through mouth-watering visuals and a clear ordering flow.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and editorial design.',outcome:"Built to position the brand as a market leader and generate qualified project enquiries from high-value clients.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://velvora-luxury-fashion.vercel.app/',tags:['E-commerce','Fashion'],title:'Velvora Luxury Fashion',desc:'High-end luxury fashion e-commerce website with elegant product displays, editorial-style layout, and a premium shopping experience.',outcome:"Designed to reflect the brand's luxury positioning and convert fashion-conscious visitors into repeat buyers.",p:'Shopify',t:'E-commerce'},
+  {url:'https://david-kingsley.vercel.app/',tags:['Personal Brand','Landing Page'],title:'David Kingsley',desc:'Sleek personal brand landing page designed to position and promote an individual professional with a strong visual identity.',outcome:"Built to establish credibility and drive direct enquiries through a compelling personal brand presentation.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://ijebu-spice-lounge.vercel.app/',tags:['Food & Dining','Website'],title:'Ijebu Spice Lounge',desc:'Vibrant restaurant website for a Nigerian dining experience featuring menu showcase, ambiance photography, and reservation integration.',outcome:"Designed to attract new diners and drive table reservations through an appetising, experience-first layout.",p:'WordPress',t:'Website'},
+  {url:'https://vela-restuarant.vercel.app/',tags:['Food & Dining','Website'],title:'Vela Restaurant',desc:'Sophisticated restaurant website with online menu, about story, gallery, and booking functionality.',outcome:"Built to increase walk-ins and reservations by showcasing the dining experience with premium visual presentation.",p:'WordPress',t:'Website'},
+  {url:'https://westmidlands-research-report.vercel.app/',tags:['Education','Landing Page'],title:'West Midlands School Research',desc:'Clean academic-style landing page presenting a school research report with structured data sections.',outcome:"Designed to present research findings clearly and professionally for academic and institutional audiences.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://harrison-and-cole-attorneys.vercel.app/',tags:['Legal','Website'],title:'Harrison & Cole Attorneys',desc:'Professional law firm website with practice areas, attorney profiles, and consultation request functionality.',outcome:"Built to build trust with prospective clients and generate consultation bookings through authoritative design.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://future-x-global-summit.vercel.app/',tags:['Events','Funnel'],title:'Future X Global Summit',desc:'High-converting event registration funnel with speaker lineup, schedule, countdown timer, and ticket purchase flow.',outcome:"Engineered to maximise event registrations through urgency-driven design and a frictionless sign-up experience.",p:'GoHighLevel',t:'Funnel'},
+  {url:'https://iron-haven-fitness-club.vercel.app/',tags:['Fitness','Landing Page'],title:'Iron Haven Fitness Club',desc:'Energetic fitness club landing page with membership plans, class schedules, trainer profiles, and conversion layout.',outcome:"Built to drive membership sign-ups by communicating value clearly and reducing barriers to joining.",p:'GoHighLevel',t:'Landing Page'},
+  {url:'https://azure-pearl-resort.vercel.app/',tags:['Hospitality','Website'],title:'Azure Pearl Resort',desc:'Luxury resort website with immersive full-screen visuals, amenities showcase, room gallery, and booking experience.',outcome:"Designed to position the resort as a premium destination and convert browsers into direct booking enquiries.",p:'WordPress',t:'Website'},
+  {url:'https://flow-sync-ai-ochre.vercel.app/',tags:['SaaS','Landing Page'],title:'FlowSync AI',desc:'Modern SaaS landing page for an AI productivity tool featuring feature highlights, pricing tiers, and free trial CTA.',outcome:"Built to communicate product value rapidly and drive free trial sign-ups through benefit-focused copy and design.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://titan-build-construction-group-h3sg.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction v2',desc:'Updated construction company website with enhanced project portfolio and refreshed editorial design.',outcome:"Rebuilt to strengthen brand authority and improve lead generation for high-value construction contracts.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://future-x-kohl.vercel.app/',tags:['Events','Website'],title:'Future X Events',desc:'Dynamic events website showcasing upcoming and past events, speaker features, and an engaging registration flow.',outcome:"Designed to build community anticipation and drive event registrations through an immersive events experience.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://crumble-cookie-brand.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Crumble Cookie',desc:'Playful Shopify e-commerce store for a cookie brand featuring product collections and seamless checkout.',outcome:"Built to drive impulse purchases and repeat orders through a fun, brand-consistent shopping experience.",p:'Shopify',t:'E-commerce'},
+  {url:'https://maison-crumb-b2xk.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Maison Crumb',desc:'Premium artisan bakery e-commerce website with elegant product presentation and custom order capability.',outcome:"Designed to elevate brand perception and convert food lovers into loyal paying customers.",p:'Shopify',t:'E-commerce'},
+  {url:'https://olivia-hart-photography-1mlr.vercel.app/',tags:['Photography','Website'],title:'Olivia Hart Photography',desc:'Elegant photography portfolio website with immersive gallery, service packages, and booking enquiry functionality.',outcome:"Built to showcase photographic work beautifully and convert visitors into booked shoots.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://tourney-forge.vercel.app/',tags:['SaaS','Website'],title:'TourneyForge',desc:'Tournament management platform landing page with feature showcase, how-it-works section, and sign-up flow.',outcome:"Designed to communicate platform value and drive user registrations for a competitive gaming management tool.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://skillforge-academy-sepia.vercel.app/',tags:['Education','Website'],title:'SkillForge Academy',desc:'Online learning platform landing page featuring course catalogue, instructor profiles, and enrolment CTAs.',outcome:"Built to drive course enrolments by building learner confidence through clear outcomes and social proof.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://lumi-re-beauty-spa.vercel.app/',tags:['Beauty','Website'],title:'Lumière Beauty Spa',desc:'Luxurious beauty spa website with service menu, treatment gallery, team profiles, and online booking.',outcome:"Designed to attract premium clients and drive appointment bookings through a calming, high-end aesthetic.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://summit-peak-roofing-two.vercel.app/',tags:['Construction','Landing Page'],title:'Summit Peak Roofing',desc:'Professional roofing company landing page with service overview, project gallery, and quote request form.',outcome:"Built to generate qualified roofing leads through a trust-focused, conversion-optimised layout.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'http://monarchbeautyventures.com/',tags:['Beauty','Funnel'],title:'Monarch Beauty Ventures',desc:'Beauty brand sales funnel built on GoHighLevel with product showcase, testimonials, and purchase flow.',outcome:"Engineered to drive product sales and build brand loyalty through a polished, conversion-focused funnel.",p:'GoHighLevel',t:'Funnel'}
 ];
 
 var cardColors = [
@@ -183,9 +195,10 @@ function renderProjects(projects) {
     overlay.textContent = 'View Live Site →';
     imgWrap.appendChild(overlay);
 
+    var outcomeHtml = p.outcome ? '<div class="port-outcome"><span>&#127919;</span> ' + p.outcome + '</div>' : '';
     var body = document.createElement('div');
     body.className = 'port-body';
-    body.innerHTML = '<div class="port-tags">' + tags + '</div><h3 class="port-title-card">' + p.title + '</h3><p class="port-desc">' + p.desc + '</p><div class="port-meta"><div><strong>Platform</strong><span>' + p.p + '</span></div><div><strong>Type</strong><span>' + p.t + '</span></div></div>';
+    body.innerHTML = '<div class="port-tags">' + tags + '</div><h3 class="port-title-card">' + p.title + '</h3><p class="port-desc">' + p.desc + '</p>' + outcomeHtml + '<div class="port-meta"><div><strong>Platform</strong><span>' + p.p + '</span></div><div><strong>Type</strong><span>' + p.t + '</span></div></div>';
 
     card.appendChild(imgWrap);
     card.appendChild(body);
