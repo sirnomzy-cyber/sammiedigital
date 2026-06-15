@@ -796,6 +796,349 @@ section{transform:translateZ(0)}
   </div>
 </section>
 
+<!-- ============================================================
+     SAMMIE ASSISTANT — AI Chatbot Widget
+     ============================================================ -->
+<style>
+/* --- Bubble --- */
+#sammie-bubble{position:fixed;bottom:1.75rem;right:1.75rem;z-index:9990;width:56px;height:56px;border-radius:50%;background:var(--accent);box-shadow:0 8px 28px rgba(59,130,246,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;border:none;outline:none}
+#sammie-bubble:hover{transform:scale(1.1);box-shadow:0 12px 36px rgba(59,130,246,0.6)}
+#sammie-bubble svg{width:26px;height:26px;fill:#fff;transition:opacity 0.2s}
+#sammie-bubble .sb-close{display:none}
+#sammie-bubble.open .sb-open{display:none}
+#sammie-bubble.open .sb-close{display:block}
+.sammie-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid var(--bg);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+
+/* --- Window --- */
+#sammie-window{position:fixed;bottom:5.5rem;right:1.75rem;z-index:9989;width:360px;max-height:560px;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.35);display:flex;flex-direction:column;transform:translateY(20px) scale(0.96);opacity:0;pointer-events:none;transition:transform 0.3s cubic-bezier(.22,1,.36,1),opacity 0.3s ease;overflow:hidden}
+#sammie-window.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+
+/* --- Header --- */
+.sammie-header{background:linear-gradient(135deg,#1e3a8a,var(--accent));padding:1rem 1.25rem;display:flex;align-items:center;gap:0.75rem;flex-shrink:0}
+.sammie-avatar{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.sammie-header-text{flex:1}
+.sammie-header-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:#fff;line-height:1.2}
+.sammie-header-status{font-size:0.68rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:0.35rem;margin-top:0.15rem}
+.sammie-status-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block}
+
+/* --- Messages --- */
+.sammie-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.75rem;scroll-behavior:smooth}
+.sammie-msgs::-webkit-scrollbar{width:4px}
+.sammie-msgs::-webkit-scrollbar-track{background:transparent}
+.sammie-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.sammie-msg{display:flex;gap:0.5rem;align-items:flex-end;max-width:88%}
+.sammie-msg.bot{align-self:flex-start}
+.sammie-msg.user{align-self:flex-end;flex-direction:row-reverse}
+.sammie-msg-avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;color:#fff}
+.sammie-bubble-msg{padding:0.65rem 0.9rem;border-radius:14px;font-size:0.82rem;line-height:1.65;font-family:'DM Sans',sans-serif}
+.sammie-msg.bot .sammie-bubble-msg{background:var(--bg3);color:var(--text);border-bottom-left-radius:4px}
+.sammie-msg.user .sammie-bubble-msg{background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.sammie-bubble-msg a{color:var(--accent2);text-decoration:underline}
+.sammie-msg.bot .sammie-bubble-msg a{color:var(--accent)}
+
+/* Typing indicator */
+.sammie-typing{display:flex;align-items:center;gap:4px;padding:0.6rem 0.9rem}
+.sammie-typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bounce-dot 1.2s infinite}
+.sammie-typing span:nth-child(2){animation-delay:0.2s}
+.sammie-typing span:nth-child(3){animation-delay:0.4s}
+@keyframes bounce-dot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Quick replies */
+.sammie-quick{padding:0 1rem 0.5rem;display:flex;flex-wrap:wrap;gap:0.4rem;flex-shrink:0}
+.sammie-qbtn{background:var(--bg3);border:1px solid var(--border2);color:var(--accent2);padding:0.35rem 0.75rem;border-radius:50px;font-size:0.72rem;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.sammie-qbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* --- Lead capture --- */
+.sammie-lead-form{padding:0.75rem 1rem;border-top:1px solid var(--border2);flex-shrink:0;display:none}
+.sammie-lead-form.show{display:block}
+.sammie-lead-form input{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:0.55rem 0.85rem;border-radius:8px;font-size:0.8rem;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:0.5rem;transition:border-color 0.2s}
+.sammie-lead-form input:focus{border-color:var(--accent)}
+.sammie-lead-form input::placeholder{color:var(--muted)}
+.sammie-lead-submit{width:100%;background:var(--accent);color:#fff;border:none;padding:0.65rem;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.sammie-lead-submit:hover{background:#2563eb}
+
+/* --- Input bar --- */
+.sammie-input-row{display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;border-top:1px solid var(--border2);flex-shrink:0}
+.sammie-input{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:0.6rem 0.9rem;border-radius:50px;font-size:0.82rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.sammie-input:focus{border-color:var(--accent)}
+.sammie-input::placeholder{color:var(--muted)}
+.sammie-send{width:36px;height:36px;background:var(--accent);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background 0.2s}
+.sammie-send:hover{background:#2563eb}
+.sammie-send svg{width:16px;height:16px;fill:#fff}
+
+/* Powered by */
+.sammie-footer{text-align:center;padding:0.4rem;font-size:0.62rem;color:var(--muted);border-top:1px solid var(--border2);flex-shrink:0}
+
+@media(max-width:400px){#sammie-window{width:calc(100vw - 2rem);right:1rem;bottom:5rem}}
+</style>
+
+<!-- Bubble button -->
+<button id="sammie-bubble" aria-label="Open chat" onclick="sammieToggle()">
+  <div class="sammie-badge"></div>
+  <svg class="sb-open" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <svg class="sb-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+</button>
+
+<!-- Chat window -->
+<div id="sammie-window" role="dialog" aria-label="Sammie Assistant">
+  <div class="sammie-header">
+    <div class="sammie-avatar">✦</div>
+    <div class="sammie-header-text">
+      <div class="sammie-header-name">Sammie Assistant</div>
+      <div class="sammie-header-status"><span class="sammie-status-dot"></span> Online · Typically replies instantly</div>
+    </div>
+  </div>
+
+  <div class="sammie-msgs" id="sammie-msgs"></div>
+
+  <div class="sammie-quick" id="sammie-quick"></div>
+
+  <div class="sammie-lead-form" id="sammie-lead-form">
+    <input type="text" id="sl-name" placeholder="Your name" />
+    <input type="email" id="sl-email" placeholder="Your email address" />
+    <input type="text" id="sl-service" placeholder="Service you're interested in" />
+    <button class="sammie-lead-submit" onclick="sammieSubmitLead()">Send My Details →</button>
+  </div>
+
+  <div class="sammie-input-row">
+    <input class="sammie-input" id="sammie-input" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter')sammieSubmit()" />
+    <button class="sammie-send" onclick="sammieSubmit()" aria-label="Send">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+  <div class="sammie-footer">Powered by AI · SammieDigital</div>
+</div>
+
+<script>
+(function(){
+  /* ── CONFIG ── */
+  var SYSTEM_PROMPT = `You are Sammie Assistant, the friendly and knowledgeable AI assistant for SammieDigital — a digital strategy agency founded by Onome Ahorituwere, based in Lagos, Nigeria.
+
+Your job is to:
+1. Answer questions about SammieDigital's services, process, and expertise
+2. Qualify and capture leads (name, email, service interest) naturally in conversation
+3. Guide visitors toward booking a free strategy call
+
+ABOUT SAMMIE / ONOME:
+- Full name: Onome Ahorituwere, Founder of SammieDigital & IT Project Manager
+- 7+ years of freelance experience, 150+ projects delivered
+- Level 2 Seller on Fiverr, Top Rated on Upwork, 4.9★ average rating
+- Based in Lagos, Nigeria — serves clients in the US, UK, Nigeria & globally
+- Certified: Google AI Professional, HubSpot (Digital, Inbound & Email Marketing)
+- Background in Web 3.0 operations, led teams across 3 countries with AIESEC
+- Email: onomesamuel@gmail.com | Phone: +234 810 601 4201
+- Portfolio: sammiedigital.vercel.app/portfolio.html
+
+SERVICES & ROUGH PRICING:
+1. Funnel Design & Development — Multi-step sales funnels (ClickFunnels, GoHighLevel, WordPress). Starting from $300.
+2. Landing Page Design — High-converting landing pages (WordPress, GoHighLevel, HTML/CSS). Starting from $150.
+3. Email Marketing Systems — Campaigns, automations, list nurturing (Mailchimp, ActiveCampaign, Klaviyo). Starting from $200.
+4. Website Development — Full builds for SMEs, brand identity, copywriting, deployment (WordPress, GoHighLevel, Vercel). Starting from $400.
+5. AI-Powered Workflows — Integrate AI tools to automate content and reduce costs (Claude, ChatGPT, Copilot). Starting from $250.
+6. IT Project Management — Full project lifecycle management (Agile, Notion). Starting from $500/project.
+
+PROCESS (8 steps): Discover → Research → Strategy → Wireframe → Design → Optimise → Launch → Scale
+
+LEAD CAPTURE GOAL:
+When a visitor shows interest in a service or asks about pricing/getting started, warmly ask for their name, email, and what service they need so Onome can follow up. Don't be pushy — do it naturally after 2-3 exchanges. Once captured, confirm you'll pass it to Onome and suggest they also book a free strategy call at #contact.
+
+TONE: Warm, professional, concise. Use short paragraphs. Don't use excessive bullet points. Speak like a knowledgeable colleague, not a robot. Match the premium feel of the brand.
+
+IMPORTANT: Keep responses under 120 words unless a detailed explanation is genuinely needed. Never make up services, prices, or facts not listed above.`;
+
+  var history = [];
+  var leadCaptured = false;
+  var isOpen = false;
+  var isTyping = false;
+
+  var quickReplies = [
+    ['💼 Services', 'What services do you offer?'],
+    ['💰 Pricing', 'How much do your services cost?'],
+    ['🗓️ Book a Call', 'I want to book a free strategy call'],
+    ['📁 Portfolio', 'Can I see your portfolio?'],
+    ['⚡ Get Started', 'I want to get started on a project']
+  ];
+
+  /* ── TOGGLE ── */
+  window.sammieToggle = function(){
+    isOpen = !isOpen;
+    document.getElementById('sammie-bubble').classList.toggle('open', isOpen);
+    document.getElementById('sammie-window').classList.toggle('open', isOpen);
+    if(isOpen && history.length === 0) sammieGreet();
+  };
+
+  /* ── GREET ── */
+  function sammieGreet(){
+    addMsg('bot', "👋 Hi there! I'm <strong>Sammie Assistant</strong> — your guide to everything SammieDigital.<br><br>Whether you're curious about our services, pricing, or just want to chat about your project, I'm here to help. What can I do for you today?");
+    showQuickReplies();
+  }
+
+  /* ── QUICK REPLIES ── */
+  function showQuickReplies(){
+    var c = document.getElementById('sammie-quick');
+    c.innerHTML = '';
+    quickReplies.forEach(function(q){
+      var b = document.createElement('button');
+      b.className = 'sammie-qbtn';
+      b.textContent = q[0];
+      b.onclick = function(){ sendMsg(q[1]); };
+      c.appendChild(b);
+    });
+  }
+
+  function clearQuickReplies(){
+    document.getElementById('sammie-quick').innerHTML = '';
+  }
+
+  /* ── SEND ── */
+  window.sammieSubmit = function(){
+    var inp = document.getElementById('sammie-input');
+    var text = inp.value.trim();
+    if(!text || isTyping) return;
+    inp.value = '';
+    sendMsg(text);
+  };
+
+  function sendMsg(text){
+    clearQuickReplies();
+    addMsg('user', text);
+    history.push({role:'user', content: text});
+    callClaude();
+  }
+
+  /* ── ADD MESSAGE ── */
+  function addMsg(role, html){
+    var wrap = document.createElement('div');
+    wrap.className = 'sammie-msg ' + role;
+    if(role === 'bot'){
+      var av = document.createElement('div');
+      av.className = 'sammie-msg-avatar';
+      av.textContent = '✦';
+      wrap.appendChild(av);
+    }
+    var bubble = document.createElement('div');
+    bubble.className = 'sammie-bubble-msg';
+    bubble.innerHTML = html;
+    wrap.appendChild(bubble);
+    var msgs = document.getElementById('sammie-msgs');
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+    return wrap;
+  }
+
+  /* ── TYPING ── */
+  function showTyping(){
+    isTyping = true;
+    var wrap = document.createElement('div');
+    wrap.className = 'sammie-msg bot';
+    wrap.id = 'sammie-typing-wrap';
+    var av = document.createElement('div');
+    av.className = 'sammie-msg-avatar';
+    av.textContent = '✦';
+    wrap.appendChild(av);
+    var b = document.createElement('div');
+    b.className = 'sammie-bubble-msg sammie-typing';
+    b.innerHTML = '<span></span><span></span><span></span>';
+    wrap.appendChild(b);
+    var msgs = document.getElementById('sammie-msgs');
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping(){
+    isTyping = false;
+    var t = document.getElementById('sammie-typing-wrap');
+    if(t) t.remove();
+  }
+
+  /* ── LEAD FORM ── */
+  function showLeadForm(){
+    document.getElementById('sammie-lead-form').classList.add('show');
+  }
+
+  window.sammieSubmitLead = function(){
+    var name = document.getElementById('sl-name').value.trim();
+    var email = document.getElementById('sl-email').value.trim();
+    var service = document.getElementById('sl-service').value.trim();
+    if(!name || !email){ alert('Please enter your name and email.'); return; }
+
+    // Send via Web3Forms
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        access_key: 'YOUR_WEB3FORMS_KEY',
+        subject: '🤖 Sammie Assistant Lead: ' + name,
+        from_name: name,
+        email: email,
+        message: 'Lead captured via Sammie Assistant chatbot.\n\nName: '+name+'\nEmail: '+email+'\nService Interest: '+(service||'Not specified')
+      })
+    }).catch(function(){});
+
+    leadCaptured = true;
+    document.getElementById('sammie-lead-form').classList.remove('show');
+    document.getElementById('sl-name').value='';
+    document.getElementById('sl-email').value='';
+    document.getElementById('sl-service').value='';
+
+    addMsg('bot', "🎉 Got it, <strong>"+name+"</strong>! I've passed your details to Onome. You can expect a reply within 24 hours.<br><br>In the meantime, feel free to <a href='#contact' onclick='sammieToggle()'>book a free strategy call</a> or <a href='portfolio.html' target='_blank'>browse the portfolio</a>.");
+    showQuickReplies();
+  };
+
+  /* ── CLAUDE API ── */
+  function callClaude(){
+    showTyping();
+    var messages = history.slice(-10); // keep last 10 turns for context
+
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens: 400,
+        system: SYSTEM_PROMPT,
+        messages: messages
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      removeTyping();
+      var reply = '';
+      if(data.content && data.content[0] && data.content[0].text){
+        reply = data.content[0].text;
+      } else {
+        reply = "I'm sorry, I had a little hiccup there. Please try again or <a href='mailto:onomesamuel@gmail.com'>email Onome directly</a>.";
+      }
+
+      // Convert markdown-ish to basic HTML
+      reply = reply.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      reply = reply.replace(/\n\n/g,'<br><br>');
+      reply = reply.replace(/\n/g,'<br>');
+
+      history.push({role:'assistant', content: data.content && data.content[0] ? data.content[0].text : reply});
+      addMsg('bot', reply);
+
+      // Show lead form if not yet captured and reply mentions getting started / pricing
+      if(!leadCaptured){
+        var lower = reply.toLowerCase();
+        if(lower.includes('name') && lower.includes('email') || lower.includes('get back to you') || lower.includes('follow up')){
+          showLeadForm();
+        }
+      }
+
+      // Show quick replies after bot responds
+      showQuickReplies();
+    })
+    .catch(function(){
+      removeTyping();
+      addMsg('bot', "Hmm, I seem to be having trouble connecting. Please <a href='mailto:onomesamuel@gmail.com'>email Onome directly</a> or <a href='https://wa.me/2348106014201' target='_blank'>reach out on WhatsApp</a>.");
+    });
+  }
+
+})();
+</script>
+
 <!-- FOOTER -->
 <footer>
   <div class="foot-wrap">
