@@ -72,7 +72,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 <div class="port-hero">
   <div class="port-label">Selected Works</div>
-  <h1 class="port-title">25+ Projects.<br><em>Every One Delivered.</em></h1>
+  <h1 class="port-title">28+ Projects.<br><em>Every One Delivered.</em></h1>
   <p class="port-sub">A curated collection of websites, funnels, landing pages, and digital experiences delivered for clients across Nigeria, the US, the UK, and beyond.</p>
 </div>
 
@@ -145,7 +145,10 @@ function renderProjects(projects) {
 
     var imgWrap = document.createElement('div');
     imgWrap.className = 'port-img';
-    imgWrap.style.background = fallbackColors[colorIdx];
+    imgWrap.style.background = fallbackColors[colorIdx,
+  {url:'https://hope-bridge-foundation-gamma.vercel.app/',tags:['Non-profit','Landing Page'],title:'Hope Bridge Foundation',desc:'Compelling non-profit landing page built on ClickFunnels to communicate mission, drive donations, and grow volunteer sign-ups.',outcome:'Designed to inspire action and convert compassionate visitors into donors and supporters through emotive storytelling.',p:'ClickFunnels',t:'Landing Page'},
+  {url:'https://ajitarobinson.com/',tags:['Personal Brand','Website'],title:'Ajita Robinson',desc:'Professional personal brand website built with WordPress and Elementor, featuring services, blog, media appearances, and speaking engagements.',outcome:'Built to position Ajita as a thought leader and drive speaking and consulting enquiries through a polished professional presence.',p:'WordPress / Elementor',t:'Website'},
+  {url:'https://wander-vista-travels.vercel.app/',tags:['Travel','Landing Page'],title:'WanderVista Travels',desc:'Vibrant travel agency landing page showcasing destinations, tour packages, and booking enquiry functionality for an aspirational travel brand.',outcome:'Designed to inspire wanderlust and convert travel dreamers into booked enquiries through immersive destination visuals.',p:'HTML / CSS / JS',t:'Landing Page'}];
     imgWrap.style.position = 'relative';
     imgWrap.style.overflow = 'hidden';
 
