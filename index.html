@@ -1222,12 +1222,12 @@ function runHeroCounters(){
 
 // DATA
 var projects=[
-  {url:'https://summit-peak-roofing-two.vercel.app/',tags:['Construction','Landing Page'],title:'Summit Peak Roofing',desc:'Professional roofing company landing page with service overview, project gallery, and quote request form built for a local roofing business.',outcome:"Built to generate qualified roofing leads through a trust-focused, conversion-optimised layout.",p:'HTML / CSS / JS',t:'Landing Page'},
   {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow.',outcome:"Designed to grow organic readership and maximise affiliate revenue through an engaging, content-first layout.",p:'Vercel / GitHub',t:'Blog'},
-  {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout.',outcome:"Built to increase appointment bookings by reducing friction and building immediate trust with new patients.",p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and lead capture.',outcome:"Engineered to capture qualified buyer leads and drive enquiries through an immersive, premium presentation.",p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity.',outcome:"Designed to convert website visitors into custom order enquiries through mouth-watering visuals and a clear ordering flow.",p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and editorial design.',outcome:"Built to position the brand as a market leader and generate qualified project enquiries from high-value clients.",p:'HTML / CSS / JS',t:'Website'}
+  {url:'https://beckyhirst-world.vercel.app/',tags:['Personal Brand','Website'],title:'Becky Hirst',desc:'Multi-dimensional personal brand website for a community engagement strategist, speaker, and author, spanning speaking, media, and an online education platform.',outcome:"Built to unify a sprawling 27-year practice into one polished hub that converts visitors into keynote bookings, consulting enquiries, and course sign-ups.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://wander-vista-travels.vercel.app/',tags:['Travel','Landing Page'],title:'WanderVista Travels',desc:'Vibrant travel agency landing page showcasing destinations, tour packages, and booking enquiry functionality for an aspirational travel brand.',outcome:"Designed to inspire wanderlust and convert travel dreamers into booked enquiries through immersive destination visuals.",p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://bluewave-pool-services.vercel.app/',tags:['Home Services','Website'],title:'BlueWave Pool Services',desc:'Premium pool construction, renovation, and maintenance website for a luxury pool company, featuring service breakdowns, project portfolio, and quote requests.',outcome:"Designed to convert high-value homeowners and commercial clients into booked consultations through trust-building credentials and clear service detail.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://summit-peak-roofing-two.vercel.app/',tags:['Construction','Website'],title:'Summit Peak Roofing',desc:'Full-service roofing company website with service breakdowns, before/after project gallery, financing options, and a multi-step free estimate form.',outcome:"Built to convert storm-damage and replacement leads through trust signals, transparent pricing, and a frictionless estimate request flow.",p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://olivia-hart-photography.vercel.app/',tags:['Photography','Website'],title:'Olivia Hart Photography',desc:'Award-winning wedding and portrait photography website featuring a signature gallery, service collections, transparent pricing, and a client journey walkthrough.',outcome:"Built to position the photographer as a premium choice and convert visitors into booked consultations for weddings and portrait sessions.",p:'HTML / CSS / JS',t:'Website'}
 ];
 
 var testimonials=[
@@ -1260,6 +1260,7 @@ var modals={
 
 // RENDER PROJECTS
 var wg = document.getElementById('workGrid');
+var homeLazyQueue = [];
 var fallbackGradients = [
   'linear-gradient(135deg,#0F4C81,#1a2a4a)',
   'linear-gradient(135deg,#1a1a2e,#2d1b4e)',
@@ -1269,8 +1270,8 @@ var fallbackGradients = [
   'linear-gradient(135deg,#1a2a1a,#2d4a2d)'
 ];
 
-// useIframe: true for sites we own (Vercel) — they allow iframes
-// useIframe: false for external sites like Shopify
+// useImg: every project card now uses a static screenshot (no iframes) — far cheaper than rendering
+// 6+ full external sites at once. Images are lazy-loaded only when the card nears the viewport.
 projects.forEach(function(p, idx){
   var tags = p.tags.map(function(t){ return '<span class="work-tag">'+t+'</span>'; }).join('');
 
@@ -1284,35 +1285,23 @@ projects.forEach(function(p, idx){
   imgWrap.style.aspectRatio = '16/9';
   imgWrap.style.background = fallbackGradients[idx % 6];
 
-  var isVercel = p.url.indexOf('vercel.app') !== -1;
-
-  if (isVercel) {
-    // Use iframe for Vercel sites — reliable, no external dependency
-    var iframe = document.createElement('iframe');
-    iframe.src = p.url;
-    iframe.loading = 'lazy';
-    iframe.scrolling = 'no';
-    iframe.setAttribute('title', p.title);
-    iframe.style.cssText = 'position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none';
-    imgWrap.appendChild(iframe);
-  } else {
-    // Use screenshot service for external sites (Shopify etc)
-    var img = document.createElement('img');
-    img.alt = p.title;
-    img.loading = 'lazy';
-    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;display:block;position:absolute;top:0;left:0';
-    img.src = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + p.url;
-    img.onerror = (function(wrap, title, url) {
-      return function() {
-        this.style.display = 'none';
-        var lbl = document.createElement('div');
-        lbl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.85);text-align:center;width:80%';
-        lbl.textContent = title;
-        wrap.appendChild(lbl);
-      };
-    })(imgWrap, p.title, p.url);
-    imgWrap.appendChild(img);
-  }
+  var img = document.createElement('img');
+  img.alt = p.title;
+  img.width = 640;
+  img.height = 360;
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;display:block;position:absolute;top:0;left:0';
+  img.dataset.src = 'https://image.thum.io/get/width/640/crop/360/noanimate/' + p.url;
+  img.onerror = (function(wrap, title, url) {
+    return function() {
+      this.style.display = 'none';
+      var lbl = document.createElement('div');
+      lbl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.85);text-align:center;width:80%';
+      lbl.textContent = title;
+      wrap.appendChild(lbl);
+    };
+  })(imgWrap, p.title, p.url);
+  imgWrap.appendChild(img);
+  homeLazyQueue.push(img);
 
   // Overlay link
   var ol = document.createElement('a');
@@ -1333,6 +1322,18 @@ projects.forEach(function(p, idx){
 
   setTimeout(function(){ card.classList.add('on'); }, 150 * idx);
 });
+
+var homeLazyObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var el = entry.target;
+      el.src = el.dataset.src;
+      el.removeAttribute('data-src');
+      homeLazyObserver.unobserve(el);
+    }
+  });
+}, { rootMargin: '200px 0px' });
+homeLazyQueue.forEach(function(img) { homeLazyObserver.observe(img); });
 // RENDER TESTIMONIALS
 var tg = document.getElementById('testiGrid');
 testimonials.forEach(function(t){

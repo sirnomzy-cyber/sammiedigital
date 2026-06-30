@@ -40,7 +40,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 .port-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.25);box-shadow:0 16px 40px rgba(0,0,0,0.15)}
 .port-card.hidden{display:none}
 .port-img{aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--bg3)}
-.port-img iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none}
 .port-overlay{position:absolute;inset:0;background:rgba(59,130,246,0.88);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;text-decoration:none}
 .port-card:hover .port-overlay{opacity:1}
 .port-body{padding:1.5rem}
@@ -75,7 +74,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 <div class="port-hero">
   <div class="port-label">Selected Works</div>
-  <h1 class="port-title">28+ Projects.<br><em>Every One Delivered.</em></h1>
+  <h1 class="port-title" id="portCount">28+ Projects.<br><em>Every One Delivered.</em></h1>
   <p class="port-sub">A curated collection of websites, funnels, landing pages, and digital experiences delivered for clients across Nigeria, the US, the UK, and beyond.</p>
 </div>
 
@@ -90,6 +89,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
   <button class="filter-btn" data-filter="SaaS">SaaS</button>
   <button class="filter-btn" data-filter="Legal">Legal</button>
   <button class="filter-btn" data-filter="Blog">Blog</button>
+  <button class="filter-btn" data-filter="Home Services">Home Services</button>
+  <button class="filter-btn" data-filter="Oil & Gas">Oil & Gas</button>
 </div>
 
 <div class="port-grid" id="portGrid">
@@ -98,28 +99,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:fl
 
 <script>
 var allProjects = [
-  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow. Deployed on Vercel via GitHub.',outcome:'Designed to grow organic readership and maximise affiliate revenue through an engaging, content-first layout.',p:'Vercel / GitHub',t:'Blog'},
+  {url:'https://ajitarobinson.com/',tags:['Personal Brand','Website'],title:'Ajita Robinson',desc:'Professional personal brand website built with WordPress and Elementor, featuring services, blog, media appearances, and speaking engagements.',outcome:'Built to position Ajita as a thought leader and drive speaking and consulting enquiries through a polished professional presence.',p:'WordPress / Elementor',t:'Website'},
+  {url:'https://aurum-estates-chi.vercel.app/',tags:['Real Estate','Website'],title:'Aurum Estates',desc:'Ultra-luxury real estate website featuring premium property listings, advanced search filters, an advisor team showcase, and white-glove consultation booking.',outcome:'Designed to convert high-net-worth buyers and sellers into private consultations through a refined, trust-first browsing experience.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://azure-pearl-resort.vercel.app/',tags:['Hospitality','Website'],title:'Azure Pearl Resort',desc:'Luxury resort website with immersive full-screen visuals, amenities showcase, room gallery, and integrated booking experience.',outcome:'Built to inspire wanderlust and convert browsers into bookers through a visually stunning, seamless booking experience.',p:'WordPress',t:'Website'},
+  {url:'https://beckyhirst-world.vercel.app/',tags:['Personal Brand','Website'],title:'Becky Hirst',desc:'Multi-dimensional personal brand website for a community engagement strategist, speaker, and author, spanning speaking, media, and an online education platform.',outcome:'Built to unify a sprawling 27-year practice into one polished hub that converts visitors into keynote bookings, consulting enquiries, and course sign-ups.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://bluewave-pool-services.vercel.app/',tags:['Home Services','Website'],title:'BlueWave Pool Services',desc:'Premium pool construction, renovation, and maintenance website for a luxury pool company, featuring service breakdowns, project portfolio, and quote requests.',outcome:'Designed to convert high-value homeowners and commercial clients into booked consultations through trust-building credentials and clear service detail.',p:'HTML / CSS / JS',t:'Website'},
   {url:'https://carepoint-medical-center.vercel.app/',tags:['Health','Landing Page'],title:'CarePoint Medical Center',desc:'Professional healthcare landing page with appointment booking, services overview, and conversion-focused layout for a medical practice.',outcome:'Built to increase appointment bookings by reducing friction and building immediate trust with new patients.',p:'HTML / CSS / JS',t:'Landing Page'},
   {url:'https://celestia-cove-resort.vercel.app/',tags:['Real Estate','Landing Page'],title:'Celestia Cove Resort',desc:'High-converting real estate landing page with immersive property showcase, amenities section, and integrated lead capture for a luxury resort.',outcome:'Designed to capture high-intent buyers and generate qualified leads through aspirational visuals and a seamless enquiry flow.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity built for a premium bakery business.',outcome:'Built to drive custom cake orders and showcase brand prestige, turning website visitors into loyal, repeat customers.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and a bold editorial design with strong visual impact.',outcome:'Designed to position the brand as an industry leader and convert site visitors into serious project enquiries.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://velvora-luxury-fashion.vercel.app/',tags:['E-commerce','Fashion'],title:'Velvora Luxury Fashion',desc:'High-end luxury fashion e-commerce website with elegant product displays, editorial-style layout, and a premium shopping experience.',outcome:'Built to elevate brand perception and drive direct-to-consumer sales through a curated, high-converting shopping experience.',p:'Shopify',t:'E-commerce'},
-  {url:'https://david-kingsley.vercel.app/',tags:['Personal Brand','Landing Page'],title:'David Kingsley',desc:'Sleek personal brand landing page designed to position and promote an individual professional with a strong visual identity and clear CTA.',outcome:'Crafted to establish authority, attract the right audience, and convert profile visitors into clients or collaborators.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://ijebu-spice-lounge.vercel.app/',tags:['Food & Dining','Website'],title:'Ijebu Spice Lounge',desc:'Vibrant restaurant website for a Nigerian dining experience featuring menu showcase, ambiance photography, and reservation integration.',outcome:'Built to fill tables and grow brand loyalty by making the dining experience feel irresistible before guests even arrive.',p:'WordPress',t:'Website'},
-  {url:'https://vela-restuarant.vercel.app/',tags:['Food & Dining','Website'],title:'Vela Restaurant',desc:'Sophisticated restaurant website with online menu, about story, gallery, and booking functionality built for an upscale dining brand.',outcome:'Designed to attract discerning diners and drive reservations through an immersive, story-led digital experience.',p:'WordPress',t:'Website'},
-  {url:'https://westmidlands-research-report.vercel.app/',tags:['Education','Landing Page'],title:'West Midlands School Research',desc:'Clean academic-style landing page presenting a school research report with structured data sections and professional presentation layout.',outcome:'Built to communicate research findings clearly and professionally, lending credibility and authority to the institution.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://harrison-and-cole-attorneys.vercel.app/',tags:['Legal','Website'],title:'Harrison & Cole Attorneys',desc:'Professional law firm website conveying trust and authority with practice areas, attorney profiles, and consultation request functionality.',outcome:'Designed to build client confidence and generate consultation requests through a polished, trust-first presentation.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://future-x-global-summit.vercel.app/',tags:['Events','Funnel'],title:'Future X Global Summit',desc:'High-converting event registration funnel for a global summit, featuring speaker lineup, schedule, countdown timer, and ticket purchase flow.',outcome:'Built to maximise ticket sales and registrations through urgency-driven design and a frictionless purchase journey.',p:'GoHighLevel',t:'Funnel'},
-  {url:'https://iron-haven-fitness-club.vercel.app/',tags:['Fitness','Landing Page'],title:'Iron Haven Fitness Club',desc:'Energetic fitness club landing page with membership plans, class schedules, trainer profiles, and a strong conversion-focused layout.',outcome:'Designed to drive membership sign-ups by communicating value, community, and results at every scroll point.',p:'GoHighLevel',t:'Landing Page'},
-  {url:'https://azure-pearl-resort.vercel.app/',tags:['Hospitality','Website'],title:'Azure Pearl Resort',desc:'Luxury resort website with immersive full-screen visuals, amenities showcase, room gallery, and integrated booking experience.',outcome:'Built to inspire wanderlust and convert browsers into bookers through a visually stunning, seamless booking experience.',p:'WordPress',t:'Website'},
-  {url:'https://flow-sync-ai-ochre.vercel.app/',tags:['SaaS','Landing Page'],title:'FlowSync AI',desc:'Modern SaaS landing page for an AI productivity tool featuring feature highlights, pricing tiers, testimonials, and a free trial CTA.',outcome:'Designed to drive free trial sign-ups by clearly communicating product value and reducing decision friction.',p:'HTML / CSS / JS',t:'Landing Page'},
-  {url:'https://titan-build-construction-group-h3sg.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group v2',desc:'Updated version of the Titan Build construction company website with enhanced project portfolio and refreshed design.',outcome:'Refreshed to sharpen brand credibility and better showcase project scale, driving more qualified inbound enquiries.',p:'HTML / CSS / JS',t:'Website'},
-  {url:'https://future-x-kohl.vercel.app/',tags:['Events','Website'],title:'Future X Events',desc:'Dynamic events website showcasing upcoming and past events, speaker features, and an engaging registration flow for a recurring events brand.',outcome:'Built to grow a loyal event community and drive repeat attendance through an exciting, brand-consistent digital presence.',p:'HTML / CSS / JS',t:'Website'},
   {url:'https://crumble-cookie-brand.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Crumble Cookie',desc:'Playful and conversion-optimised Shopify e-commerce store for a cookie brand, featuring product collections, custom packaging options, and seamless checkout.',outcome:'Designed to delight customers and drive impulse purchases through fun, crave-worthy visuals and a smooth checkout flow.',p:'Shopify',t:'E-commerce'},
-  {url:'https://maison-crumb-b2xk.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Maison Crumb',desc:'Premium artisan bakery e-commerce website with elegant product presentation, custom order capability, and a refined brand aesthetic.',outcome:'Built to position the brand in the premium tier and convert admirers into paying customers through elegant presentation.',p:'Shopify',t:'E-commerce'},
+  {url:'https://david-kingsley.vercel.app/',tags:['Personal Brand','Landing Page'],title:'David Kingsley',desc:'Sleek personal brand landing page designed to position and promote an individual professional with a strong visual identity and clear CTA.',outcome:'Crafted to establish authority, attract the right audience, and convert profile visitors into clients or collaborators.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://flow-sync-ai-ochre.vercel.app/',tags:['SaaS','Landing Page'],title:'FlowSync AI',desc:'Modern SaaS landing page for an AI productivity tool featuring feature highlights, pricing tiers, testimonials, and a free trial CTA.',outcome:'Designed to drive free trial sign-ups by clearly communicating product value and reducing decision friction.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://future-x-kohl.vercel.app/',tags:['Events','Website'],title:'Future X Events',desc:'Dynamic events website showcasing upcoming and past events, speaker features, and an engaging registration flow for a recurring events brand.',outcome:'Built to grow a loyal event community and drive repeat attendance through an exciting, brand-consistent digital presence.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://future-x-global-summit.vercel.app/',tags:['Events','Funnel'],title:'Future X Global Summit',desc:'High-converting event registration funnel for a global summit, featuring speaker lineup, schedule, countdown timer, and ticket purchase flow.',outcome:'Built to maximise ticket sales and registrations through urgency-driven design and a frictionless purchase journey.',p:'GoHighLevel',t:'Funnel'},
+  {url:'https://harrison-and-cole-attorneys.vercel.app/',tags:['Legal','Website'],title:'Harrison & Cole Attorneys',desc:'Professional law firm website conveying trust and authority with practice areas, attorney profiles, and consultation request functionality.',outcome:'Designed to build client confidence and generate consultation requests through a polished, trust-first presentation.',p:'HTML / CSS / JS',t:'Website'},
   {url:'https://hope-bridge-foundation-gamma.vercel.app/',tags:['Non-profit','Landing Page'],title:'Hope Bridge Foundation',desc:'Compelling non-profit landing page built on ClickFunnels to communicate mission, drive donations, and grow volunteer sign-ups.',outcome:'Designed to inspire action and convert compassionate visitors into donors and supporters through emotive storytelling.',p:'ClickFunnels',t:'Landing Page'},
-  {url:'https://ajitarobinson.com/',tags:['Personal Brand','Website'],title:'Ajita Robinson',desc:'Professional personal brand website built with WordPress and Elementor, featuring services, blog, media appearances, and speaking engagements.',outcome:'Built to position Ajita as a thought leader and drive speaking and consulting enquiries through a polished professional presence.',p:'WordPress / Elementor',t:'Website'},
-  {url:'https://wander-vista-travels.vercel.app/',tags:['Travel','Landing Page'],title:'WanderVista Travels',desc:'Vibrant travel agency landing page showcasing destinations, tour packages, and booking enquiry functionality for an aspirational travel brand.',outcome:'Designed to inspire wanderlust and convert travel dreamers into booked enquiries through immersive destination visuals.',p:'HTML / CSS / JS',t:'Landing Page'}
+  {url:'https://ijebu-spice-lounge.vercel.app/',tags:['Food & Dining','Website'],title:'Ijebu Spice Lounge',desc:'Vibrant restaurant website for a Nigerian dining experience featuring menu showcase, ambiance photography, and reservation integration.',outcome:'Built to fill tables and grow brand loyalty by making the dining experience feel irresistible before guests even arrive.',p:'WordPress',t:'Website'},
+  {url:'https://iron-haven-fitness-club.vercel.app/',tags:['Fitness','Landing Page'],title:'Iron Haven Fitness Club',desc:'Energetic fitness club landing page with membership plans, class schedules, trainer profiles, and a strong conversion-focused layout.',outcome:'Designed to drive membership sign-ups by communicating value, community, and results at every scroll point.',p:'GoHighLevel',t:'Landing Page'},
+  {url:'https://lead-iq-ai.vercel.app/',tags:['SaaS','Landing Page'],title:'LeadIQ AI',desc:'AI-powered lead generation landing page for a marketing automation platform, featuring strategy-session lead capture, results showcase, and integration highlights.',outcome:'Built to convert visiting businesses into booked free-strategy sessions through results-driven proof and a low-friction qualification form.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://lumi-re-beauty-spa.vercel.app/',tags:['Beauty & Wellness','Website'],title:'Lumière Beauty & Spa',desc:'Luxury beauty and spa website featuring service menus, signature packages, membership tiers, team profiles, and an online booking system.',outcome:'Designed to convert visitors into booked appointments and recurring members through aspirational visuals and tiered membership incentives.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://maison-crumb-b2xk.vercel.app/',tags:['E-commerce','Food & Bakery'],title:'Maison Crumb',desc:'Premium artisan bakery e-commerce website with elegant product presentation, custom order capability, and a refined brand aesthetic.',outcome:'Built to position the brand in the premium tier and convert admirers into paying customers through elegant presentation.',p:'Shopify',t:'E-commerce'},
+  {url:'https://marluscious-bite.vercel.app/',tags:['Food & Bakery','Website'],title:'Marluscious Bite',desc:'Elegant cake baking website with full menu showcase, custom order section, gallery, and brand identity built for a premium bakery business.',outcome:'Built to drive custom cake orders and showcase brand prestige, turning website visitors into loyal, repeat customers.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://olivia-hart-photography.vercel.app/',tags:['Photography','Website'],title:'Olivia Hart Photography',desc:'Award-winning wedding and portrait photography website featuring a signature gallery, service collections, transparent pricing, and a client journey walkthrough.',outcome:'Built to position the photographer as a premium choice and convert visitors into booked consultations for weddings and portrait sessions.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://pgsl-five.vercel.app/',tags:['Oil & Gas','Website'],title:'Priziangori Global Services Limited',desc:'Corporate website for a Nigerian oil & gas, environmental, logistics, and hospitality conglomerate, covering multiple business divisions and trust-building credentials.',outcome:'Built to establish industrial-grade credibility across diverse business units and generate enquiries from corporate and government partners.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://rachelperry-blog.vercel.app/',tags:['Blog','Lifestyle'],title:'Rachel Perry Lifestyle Blog',desc:'Personal lifestyle blog featuring dark mode, scroll animations, affiliate link integration, and a hero slideshow. Deployed on Vercel via GitHub.',outcome:'Designed to grow organic readership and maximise affiliate revenue through an engaging, content-first layout.',p:'Vercel / GitHub',t:'Blog'},
+  {url:'https://skillforge-academy-sepia.vercel.app/',tags:['Education','SaaS'],title:'SkillForge Academy',desc:'Online learning platform website for in-demand digital skills, featuring course catalogues, instructor profiles, membership pricing tiers, and a live webinar funnel.',outcome:'Built to drive course enrollments and membership sign-ups through social proof, tiered pricing, and a frictionless webinar lead-capture flow.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://summit-peak-roofing-two.vercel.app/',tags:['Construction','Website'],title:'Summit Peak Roofing',desc:'Full-service roofing company website with service breakdowns, before/after project gallery, financing options, and a multi-step free estimate form.',outcome:'Built to convert storm-damage and replacement leads through trust signals, transparent pricing, and a frictionless estimate request flow.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://titan-build-construction-group.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group',desc:'Premium construction company website featuring project portfolio, services, team section, and a bold editorial design with strong visual impact.',outcome:'Designed to position the brand as an industry leader and convert site visitors into serious project enquiries.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://titan-build-construction-group-h3sg.vercel.app/',tags:['Construction','Website'],title:'Titan Build Construction Group v2',desc:'Updated version of the Titan Build construction company website with enhanced project portfolio and refreshed design.',outcome:'Refreshed to sharpen brand credibility and better showcase project scale, driving more qualified inbound enquiries.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://tourney-forge.vercel.app/',tags:['SaaS','Website'],title:'TourneyForge',desc:'Tournament management SaaS platform website featuring bracket format showcases, a how-it-works flow, and tiered pricing for competitive communities.',outcome:'Built to convert organizers into free sign-ups and Premier subscribers through clear format demonstrations and transparent pricing.',p:'HTML / CSS / JS',t:'Website'},
+  {url:'https://vela-restuarant.vercel.app/',tags:['Food & Dining','Website'],title:'Vela Restaurant',desc:'Sophisticated restaurant website with online menu, about story, gallery, and booking functionality built for an upscale dining brand.',outcome:'Designed to attract discerning diners and drive reservations through an immersive, story-led digital experience.',p:'WordPress',t:'Website'},
+  {url:'https://velvora-luxury-fashion.vercel.app/',tags:['E-commerce','Fashion'],title:'Velvora Luxury Fashion',desc:'High-end luxury fashion e-commerce website with elegant product displays, editorial-style layout, and a premium shopping experience.',outcome:'Built to elevate brand perception and drive direct-to-consumer sales through a curated, high-converting shopping experience.',p:'Shopify',t:'E-commerce'},
+  {url:'https://wander-vista-travels.vercel.app/',tags:['Travel','Landing Page'],title:'WanderVista Travels',desc:'Vibrant travel agency landing page showcasing destinations, tour packages, and booking enquiry functionality for an aspirational travel brand.',outcome:'Designed to inspire wanderlust and convert travel dreamers into booked enquiries through immersive destination visuals.',p:'HTML / CSS / JS',t:'Landing Page'},
+  {url:'https://westmidlands-research-report.vercel.app/',tags:['Education','Landing Page'],title:'West Midlands School Research',desc:'Clean academic-style landing page presenting a school research report with structured data sections and professional presentation layout.',outcome:'Built to communicate research findings clearly and professionally, lending credibility and authority to the institution.',p:'HTML / CSS / JS',t:'Landing Page'}
 ];
 
 var cardColors = [
@@ -143,7 +154,6 @@ function renderProjects(projects) {
 
   projects.forEach(function(p, idx) {
     var tags = p.tags.map(function(t) { return '<span class="port-tag">' + t + '</span>'; }).join('');
-    var isVercel = p.url.indexOf('vercel.app') !== -1;
     var colorIdx = idx % fallbackColors.length;
 
     var card = document.createElement('div');
@@ -155,31 +165,24 @@ function renderProjects(projects) {
     imgWrap.style.position = 'relative';
     imgWrap.style.overflow = 'hidden';
 
-    if (isVercel) {
-      var iframe = document.createElement('iframe');
-      iframe.src = p.url;
-      iframe.loading = 'lazy';
-      iframe.scrolling = 'no';
-      iframe.setAttribute('title', p.title);
-      iframe.style.cssText = 'position:absolute;top:0;left:0;width:250%;height:250%;border:none;transform:scale(0.4);transform-origin:top left;pointer-events:none';
-      imgWrap.appendChild(iframe);
-    } else {
-      var img = document.createElement('img');
-      img.alt = p.title;
-      img.loading = 'lazy';
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;top:0;left:0';
-      img.src = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + p.url;
-      img.onerror = (function(wrap, title) {
-        return function() {
-          this.style.display = 'none';
-          var lbl = document.createElement('div');
-          lbl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,0.8);text-align:center;width:80%;padding:1rem';
-          lbl.textContent = title;
-          wrap.appendChild(lbl);
-        };
-      })(imgWrap, p.title);
-      imgWrap.appendChild(img);
-    }
+    var img = document.createElement('img');
+    img.alt = p.title;
+    img.width = 640;
+    img.height = 360;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;top:0;left:0';
+    // data-src holds the real screenshot URL; IntersectionObserver swaps it in only when the card nears viewport
+    img.dataset.src = 'https://image.thum.io/get/width/640/crop/360/noanimate/' + p.url;
+    img.onerror = (function(wrap, title) {
+      return function() {
+        this.style.display = 'none';
+        var lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,0.8);text-align:center;width:80%;padding:1rem';
+        lbl.textContent = title;
+        wrap.appendChild(lbl);
+      };
+    })(imgWrap, p.title);
+    imgWrap.appendChild(img);
+    lazyImgQueue.push(img);
 
     var overlay = document.createElement('a');
     overlay.href = p.url;
@@ -197,6 +200,26 @@ function renderProjects(projects) {
     card.appendChild(body);
     grid.appendChild(card);
   });
+  startLazyObserve();
+}
+
+var lazyImgQueue = [];
+var lazyObserver = null;
+function startLazyObserve() {
+  if (!lazyObserver) {
+    lazyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          el.src = el.dataset.src;
+          el.removeAttribute('data-src');
+          lazyObserver.unobserve(el);
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+  }
+  lazyImgQueue.forEach(function(img) { lazyObserver.observe(img); });
+  lazyImgQueue = [];
 }
 
 // Filter logic
@@ -205,6 +228,7 @@ document.getElementById('filters').addEventListener('click', function(e) {
   document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
   e.target.classList.add('active');
   var filter = e.target.dataset.filter;
+  document.getElementById('portGrid').scrollIntoView({behavior:'smooth', block:'start'});
   if (filter === 'all') { renderProjects(allProjects); return; }
   var filtered = allProjects.filter(function(p){
     return p.tags.some(function(t){ return t.toLowerCase().includes(filter.toLowerCase()); }) || p.t.toLowerCase().includes(filter.toLowerCase());
@@ -213,6 +237,7 @@ document.getElementById('filters').addEventListener('click', function(e) {
 });
 
 renderProjects(allProjects);
+document.getElementById('portCount').innerHTML = allProjects.length + '+ Projects.<br><em>Every One Delivered.</em>';
 
 // Theme toggle
 var isDark = true;
